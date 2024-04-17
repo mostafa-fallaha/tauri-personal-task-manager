@@ -8,6 +8,7 @@ pub struct Model {
     #[sea_orm(primary_key)]
     #[serde(skip_deserializing)]
     pub id: i32,
+    pub title: String,
     pub text: String,
     pub task_done: bool,
     pub duration: String,

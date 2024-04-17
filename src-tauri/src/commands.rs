@@ -34,12 +34,17 @@ pub async fn get_tasks() -> Result<Vec<task::Model>, String> {
 }
 
 #[tauri::command(async)]
-pub async fn insert_task(new_text: &str, new_duration: &str) -> Result<task::Model, String> {
+pub async fn insert_task(
+    new_title: &str,
+    new_text: &str,
+    new_duration: &str,
+) -> Result<task::Model, String> {
     let connection = block_on(db::get_connection()).unwrap();
 
     let date_added = date::get_local_date();
 
     let new_task = task::ActiveModel {
+        title: Set(new_title.to_string()),
         text: Set(new_text.to_string()),
         task_done: Set(false),
         duration: Set(new_duration.to_string()),
@@ -55,6 +60,7 @@ pub async fn insert_task(new_text: &str, new_duration: &str) -> Result<task::Mod
         Ok(val) => {
             let n = task::ActiveModel {
                 id: sea_orm::ActiveValue::Set(val.last_insert_id),
+                title: new_task.title,
                 text: new_task.text,
                 task_done: new_task.task_done,
                 duration: new_task.duration,

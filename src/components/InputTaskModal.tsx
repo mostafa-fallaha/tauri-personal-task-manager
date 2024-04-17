@@ -30,6 +30,7 @@ interface Props {
 }
 
 function InputTaskModal({ isOpen, onClose }: Props) {
+  const [newTaskTitle, setNewTaskTitle] = useState("");
   const [newTaskText, setNewTaskText] = useState("");
   const [hours, setHours] = useState<number>(0);
   const [minutes, setMinutes] = useState<number>(0);
@@ -56,8 +57,8 @@ function InputTaskModal({ isOpen, onClose }: Props) {
             <Input
               type="text"
               width={"100%"}
-              value={newTaskText}
-              onChange={(e) => setNewTaskText(e.target.value)}
+              value={newTaskTitle}
+              onChange={(e) => setNewTaskTitle(e.target.value)}
             />
 
             {/* ============ Task Text ================================ */}
@@ -137,11 +138,13 @@ function InputTaskModal({ isOpen, onClose }: Props) {
             onClick={() => {
               dispatch(
                 insertTask({
+                  newTitle: newTaskTitle,
                   newText: newTaskText,
                   newDuration: convertDateToString(hours, minutes, seconds),
                 })
               );
               setNewTaskText("");
+              setNewTaskTitle("");
               onClose();
             }}
           >

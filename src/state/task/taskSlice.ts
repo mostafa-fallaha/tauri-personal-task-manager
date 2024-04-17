@@ -36,14 +36,19 @@ export const getTasks = createAsyncThunk<Task[]>("task/getTasks", async () => {
 });
 
 interface InsertInterface {
+  newTitle: string;
   newText: string;
   newDuration: string;
 }
 
 export const insertTask = createAsyncThunk<Task, InsertInterface>(
   "task/insertTask",
-  async ({ newText, newDuration }: InsertInterface) => {
-    const res = await invoke<Task>("insert_task", { newText, newDuration });
+  async ({ newTitle, newText, newDuration }: InsertInterface) => {
+    const res = await invoke<Task>("insert_task", {
+      newTitle,
+      newText,
+      newDuration,
+    });
     return res;
   }
 );

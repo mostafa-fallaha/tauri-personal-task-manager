@@ -12,7 +12,7 @@ import { IoMdDoneAll } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { Task } from "../interfaces/Task";
-import getFirst4Words from "../services/GetFirst4Words";
+// import getFirst4Words from "../services/GetFirst4Words";
 import { AppDispatch } from "../state/store";
 import { deleteTask, setTaskStatus } from "../state/task/taskSlice";
 import {
@@ -112,7 +112,7 @@ function TaskBox({ task }: Props) {
           )
         }
       />
-      <Text width={"40%"}>{getFirst4Words(task.text)}</Text>
+      <Text width={"40%"}>{task.title}</Text>
 
       <Tooltip label="start">
         <Button

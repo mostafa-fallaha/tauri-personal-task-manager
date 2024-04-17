@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Task } from "../interfaces/Task";
 import convert_to_date from "../services/ConvertToDate";
+import { LuTimer } from "react-icons/lu";
 
 interface Props {
   isOpen: boolean;
@@ -26,7 +27,7 @@ function TaskDescModal({ isOpen, onClose, task }: Props) {
       <ModalContent>
         <ModalHeader>
           <HStack display={"flex"} justifyContent={"space-between"}>
-            <Text>Task Details</Text>
+            <Text fontWeight={700}>{task.title}</Text>
             <Text fontSize={"0.8rem"} marginRight={"10%"}>
               {convert_to_date(task.date_added)}
             </Text>
@@ -34,7 +35,11 @@ function TaskDescModal({ isOpen, onClose, task }: Props) {
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text>{task.text}.</Text>
+          <Text>{task.text}</Text>
+          <HStack marginTop={"6%"}>
+            <LuTimer />
+            <Text fontWeight={500}>{task.duration}</Text>
+          </HStack>
         </ModalBody>
 
         <ModalFooter>

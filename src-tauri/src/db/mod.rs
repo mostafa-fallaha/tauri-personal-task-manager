@@ -15,6 +15,7 @@ async fn create_default_task(connection: &DatabaseConnection) -> Result<(), Stri
     let date_added = date::get_local_date();
 
     let task_one = task::ActiveModel {
+        title: Set("title 1".to_string()),
         text: Set("first task".to_string()),
         task_done: Set(false),
         duration: Set("00:00:00".to_string()),
