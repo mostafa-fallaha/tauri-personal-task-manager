@@ -16,6 +16,7 @@ import {
   NumberInputField,
   NumberInputStepper,
   Text,
+  Textarea,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -49,9 +50,9 @@ function InputTaskModal({ isOpen, onClose }: Props) {
             justifyContent={"center"}
             gap={5}
           >
-            {/* ============ Task Text ================================ */}
+            {/* ============ Task Title ================================ */}
 
-            {/* <Text>Enter Your Task</Text> */}
+            <Text alignSelf={"flex-start"}>Task Title</Text>
             <Input
               type="text"
               width={"100%"}
@@ -59,8 +60,17 @@ function InputTaskModal({ isOpen, onClose }: Props) {
               onChange={(e) => setNewTaskText(e.target.value)}
             />
 
+            {/* ============ Task Text ================================ */}
+
+            <Text alignSelf={"flex-start"}>Task Description</Text>
+            <Textarea
+              value={newTaskText}
+              onChange={(e) => setNewTaskText(e.target.value)}
+            />
+
             {/* ============ Duration ================================ */}
 
+            <Text alignSelf={"flex-start"}>Task Duration</Text>
             <Box
               display={"flex"}
               justifyContent={"center"}
