@@ -42,7 +42,7 @@
     "updater": {
       "active": true,
       "endpoints": [
-        "https://releases.myapp.com/windows/x86_64/1"
+        "https://gist.githubusercontent.com/mostafa-fallaha/be0b220589aec7cacdc05c1caa05f21b/raw/"
       ],
       "dialog": true,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDdFQzUxMkU5NzlFRTNDNUYKUldSZlBPNTU2UkxGZm5hTWFEaFpJSG5XY2NIWnhVVGU5RGZlVVJ5K3UzUXRBVnlQa3I3bjJJZlEK",
