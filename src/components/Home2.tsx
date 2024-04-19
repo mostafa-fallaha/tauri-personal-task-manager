@@ -2,11 +2,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../state/store";
 import { getTasks } from "../state/task/taskSlice";
-import Tasks from "./Tasks";
 import { Box, Button, Tooltip, useDisclosure } from "@chakra-ui/react";
 import { FaCirclePlus } from "react-icons/fa6";
 import InputTaskModal from "./InputTaskModal";
-// import NavBar from "./NavBar";
+import NavBar from "./NavBar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import UnfinishedTasks from "./UnfinishedTasks";
+import FinishedTasks from "./FinishedTasks";
 
 function Home2() {
   const tasks = useSelector((state: RootState) => state.task.tasks);
@@ -26,9 +28,33 @@ function Home2() {
         marginTop="4"
         marginRight="8"
       ></Box>
+
       {/* <NavBar /> */}
       <InputTaskModal isOpen={isOpen} onClose={onClose} />
-      <Tasks />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<NavBar />}>
+            <Route
+              index
+              element={
+                <FinishedTasks
+                  tasks={tasks.filter((t) => t.task_done === false)}
+                />
+              }
+            />
+            <Route
+              path="finished"
+              element={
+                <UnfinishedTasks
+                  tasks={tasks.filter((t) => t.task_done === true)}
+                />
+              }
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      {/* <Tasks /> */}
+
       <Tooltip label="Add a new Task">
         <Button
           fontSize={"3rem"}

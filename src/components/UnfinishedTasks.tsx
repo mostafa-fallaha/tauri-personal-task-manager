@@ -1,10 +1,12 @@
 import { Box } from "@chakra-ui/react";
 import TaskBox from "./TaskBox";
-import { RootState } from "../state/store";
-import { useSelector } from "react-redux";
+import { Task } from "../interfaces/Task";
 
-function Tasks() {
-  const tasks = useSelector((state: RootState) => state.task.tasks);
+interface Props {
+  tasks: Task[];
+}
+
+function UnfinishedTasks({ tasks }: Props) {
   return (
     <Box
       width={"100%"}
@@ -20,4 +22,4 @@ function Tasks() {
   );
 }
 
-export default Tasks;
+export default UnfinishedTasks;
