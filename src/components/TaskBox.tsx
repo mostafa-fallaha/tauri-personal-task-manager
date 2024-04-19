@@ -1,20 +1,20 @@
 import {
   Box,
   Button,
-  Checkbox,
+  // Checkbox,
   HStack,
   Text,
   Tooltip,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { IoMdDoneAll } from "react-icons/io";
+// import { IoMdDoneAll } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { Task } from "../interfaces/Task";
 // import getFirst4Words from "../services/GetFirst4Words";
 import { AppDispatch } from "../state/store";
-import { deleteTask, setTaskStatus } from "../state/task/taskSlice";
+import { deleteTask } from "../state/task/taskSlice";
 import {
   VscDebugContinue,
   VscDebugPause,
@@ -100,7 +100,7 @@ function TaskBox({ task }: Props) {
       border={"1px"}
       borderRadius={"10px"}
     >
-      <Checkbox
+      {/* <Checkbox
         icon={<IoMdDoneAll />}
         isChecked={task.task_done}
         onChange={() =>
@@ -111,7 +111,7 @@ function TaskBox({ task }: Props) {
             })
           )
         }
-      />
+      /> */}
       <Text width={"40%"}>{task.title}</Text>
 
       <Tooltip label="start">

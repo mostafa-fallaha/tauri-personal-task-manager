@@ -6,11 +6,11 @@ function NavBar() {
   return (
     <Box width={"100%"}>
       <Link to="/">
-        <Button width={"50%"}>finished</Button>
+        <Button width={"50%"}>Unfinished</Button>
       </Link>
 
       <Link to="/finished">
-        <Button width={"50%"}>unfinished</Button>
+        <Button width={"50%"}>Finished</Button>
       </Link>
 
       <Outlet />

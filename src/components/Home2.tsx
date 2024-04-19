@@ -37,7 +37,7 @@ function Home2() {
             <Route
               index
               element={
-                <FinishedTasks
+                <UnfinishedTasks
                   tasks={tasks.filter((t) => t.task_done === false)}
                 />
               }
@@ -45,7 +45,7 @@ function Home2() {
             <Route
               path="finished"
               element={
-                <UnfinishedTasks
+                <FinishedTasks
                   tasks={tasks.filter((t) => t.task_done === true)}
                 />
               }
