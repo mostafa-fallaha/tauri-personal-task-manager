@@ -9,12 +9,16 @@ import {
 import { SlOptionsVertical } from "react-icons/sl";
 import { Task } from "../interfaces/Task";
 import TaskDescModal from "./TaskDescModal";
+// import InputTaskModal from "./InputTaskModal";
+import { useState } from "react";
+import EditTaskModal from "./EditTaskModal";
 
 interface Props {
   task: Task;
 }
 
 function MenuComponent({ task }: Props) {
+  const [desc, setDesc] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Menu>
@@ -22,10 +26,33 @@ function MenuComponent({ task }: Props) {
         <SlOptionsVertical />
       </MenuButton>
       <MenuList>
-        <MenuItem onClick={onOpen}>Task Details</MenuItem>
-        <MenuItem>Edit Task</MenuItem>
+        <MenuItem
+          onClick={() => {
+            onOpen();
+            setDesc(true);
+          }}
+        >
+          Task Details
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            onOpen();
+            setDesc(false);
+          }}
+        >
+          Edit Task
+        </MenuItem>
       </MenuList>
-      <TaskDescModal isOpen={isOpen} onClose={onClose} task={task} />
+      <TaskDescModal
+        isOpen={desc ? isOpen : false}
+        onClose={onClose}
+        task={task}
+      />
+      <EditTaskModal
+        isOpen={desc ? false : isOpen}
+        onClose={onClose}
+        task={task}
+      />
     </Menu>
   );
 }
