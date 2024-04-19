@@ -119,3 +119,36 @@ pub async fn set_task_status(id: i32, task_done: bool) -> Result<Vec<task::Model
         Err(err) => Err(format!("{:?}", err)),
     }
 }
+
+#[tauri::command(async)]
+pub async fn update_task(
+    id: i32,
+    new_title: &str,
+    new_text: &str,
+    new_duration: &str,
+) -> Result<Vec<task::Model>, String> {
+    let connection = block_on(db::get_connection()).unwrap();
+
+    let model = task::Entity::find_by_id(id).one(&connection).await;
+
+    let mut active_model: task::ActiveModel = match model {
+        Ok(val) => val.unwrap().into(),
+        Err(err) => return Err(format!("{:?}", err)),
+    };
+
+    active_model.title = Set(new_title.to_string());
+    active_model.text = Set(new_text.to_string());
+    active_model.duration = Set(new_duration.to_string());
+
+    match active_model.update(&connection).await {
+        Ok(_val) => {
+            let tasks = get_tasks().await;
+
+            match tasks {
+                Ok(val) => Ok(val),
+                Err(err) => Err(format!("{:?}", err)),
+            }
+        }
+        Err(err) => Err(format!("{:?}", err)),
+    }
+}

@@ -26,7 +26,10 @@ const taskSlice = createSlice({
         (state, action: PayloadAction<Task[]>) => {
           state.tasks = action.payload;
         }
-      );
+      )
+      .addCase(updateTask.fulfilled, (state, action: PayloadAction<Task[]>) => {
+        state.tasks = action.payload;
+      });
   },
 });
 
@@ -70,6 +73,26 @@ export const setTaskStatus = createAsyncThunk<Task[], TaskInfos>(
   "task/setTaskStatus",
   async ({ id, taskDone }: TaskInfos) => {
     const res = await invoke<Task[]>("set_task_status", { id, taskDone });
+    return res;
+  }
+);
+
+interface UpdateTaskInterface {
+  id: number;
+  newTitle: string;
+  newText: string;
+  newDuration: string;
+}
+
+export const updateTask = createAsyncThunk<Task[], UpdateTaskInterface>(
+  "task/updateTask",
+  async ({ id, newTitle, newText, newDuration }: UpdateTaskInterface) => {
+    const res = await invoke<Task[]>("update_task", {
+      id,
+      newTitle,
+      newText,
+      newDuration,
+    });
     return res;
   }
 );

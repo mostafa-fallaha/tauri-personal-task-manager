@@ -20,10 +20,10 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../state/store";
-import { insertTask } from "../state/task/taskSlice";
-import convertDateToString from "../services/ConvertDateToString";
 import { Task } from "../interfaces/Task";
+import convertDateToString from "../services/ConvertDateToString";
+import { AppDispatch } from "../state/store";
+import { updateTask } from "../state/task/taskSlice";
 
 interface Props {
   isOpen: boolean;
@@ -140,7 +140,8 @@ function EditTaskModal({ isOpen, onClose, task }: Props) {
             variant="ghost"
             onClick={() => {
               dispatch(
-                insertTask({
+                updateTask({
+                  id: task.id,
                   newTitle: newTaskTitle,
                   newText: newTaskText,
                   newDuration: convertDateToString(hours, minutes, seconds),

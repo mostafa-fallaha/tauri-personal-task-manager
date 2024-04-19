@@ -24,7 +24,8 @@ fn main() {
             commands::get_tasks,
             commands::insert_task,
             commands::delete_task,
-            commands::set_task_status
+            commands::set_task_status,
+            commands::update_task
         ])
         // .setup(|_app| {
         //     // Initialize the database.
