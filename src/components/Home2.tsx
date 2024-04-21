@@ -29,7 +29,6 @@ function Home2() {
         marginRight="8"
       ></Box>
 
-      {/* <NavBar /> */}
       <InputTaskModal isOpen={isOpen} onClose={onClose} />
       <BrowserRouter>
         <Routes>
@@ -53,7 +52,6 @@ function Home2() {
           </Route>
         </Routes>
       </BrowserRouter>
-      {/* <Tasks /> */}
 
       <Tooltip label="Add a new Task">
         <Button
