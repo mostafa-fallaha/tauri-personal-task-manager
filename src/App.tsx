@@ -8,12 +8,12 @@ function App() {
       templateColumns={"250px 1fr"}
       height={"100svh"}
     >
-      <GridItem area={"aside"} borderRight={"1px "}>
+      {/* <GridItem area={"aside"} borderRight={"1px "}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem
         blanditiis, incidunt repudiandae distinctio iste iure deleniti
         doloremque eius modi, temporibus nisi eaque, doloribus fuga nostrum
         eveniet sequi corrupti unde quibusdam.
-      </GridItem>
+      </GridItem> */}
       <GridItem area={"main"}>
         <Home2 />
       </GridItem>
