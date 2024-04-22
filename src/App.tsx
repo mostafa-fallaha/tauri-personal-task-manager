@@ -1,7 +1,18 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Grid,
+  GridItem,
+  useDisclosure,
+} from "@chakra-ui/react";
 import Home2 from "./components/Home2";
+import { IoSettingsSharp } from "react-icons/io5";
+import ChangeAlarmModal from "./components/ChangeAlarmModal";
 
 function App() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Grid
       templateAreas={{ base: `"aside main"` }}
@@ -9,11 +20,26 @@ function App() {
       height={"100svh"}
     >
       <GridItem area={"aside"} borderRight={"1px "}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem
-        blanditiis, incidunt repudiandae distinctio iste iure deleniti
-        doloremque eius modi, temporibus nisi eaque, doloribus fuga nostrum
-        eveniet sequi corrupti unde quibusdam.
+        <Menu>
+          <MenuButton
+            fontSize={"2rem"}
+            position={"absolute"}
+            bottom={"0"}
+            left={"0"}
+            marginBottom="3"
+            marginLeft="4"
+            background={"none"}
+            _hover={{ background: "none" }}
+          >
+            <IoSettingsSharp />
+          </MenuButton>
+          <MenuList>
+            <MenuItem onClick={onOpen}>Change Alarm sound</MenuItem>
+          </MenuList>
+        </Menu>
+        <ChangeAlarmModal isOpen={isOpen} onClose={onClose} />
       </GridItem>
+
       <GridItem area={"main"}>
         <Home2 />
       </GridItem>
