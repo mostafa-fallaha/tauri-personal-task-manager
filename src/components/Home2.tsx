@@ -37,7 +37,7 @@ function Home2() {
               index
               element={
                 <UnfinishedTasks
-                  tasks={tasks.filter((t) => t.task_done === false)}
+                // tasks={tasks.filter((t) => t.task_done === false)}
                 />
               }
             />
@@ -45,7 +45,7 @@ function Home2() {
               path="finished"
               element={
                 <FinishedTasks
-                  tasks={tasks.filter((t) => t.task_done === true)}
+                // tasks={tasks.filter((t) => t.task_done === true)}
                 />
               }
             />

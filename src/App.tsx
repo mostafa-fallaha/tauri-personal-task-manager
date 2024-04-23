@@ -10,8 +10,12 @@ import {
 import Home2 from "./components/Home2";
 import { IoSettingsSharp } from "react-icons/io5";
 import ChangeAlarmModal from "./components/ChangeAlarmModal";
+import { invoke } from "@tauri-apps/api/tauri";
 
 function App() {
+  const handleClick = async () => {
+    await invoke("select_file");
+  };
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Grid
@@ -35,6 +39,7 @@ function App() {
           </MenuButton>
           <MenuList>
             <MenuItem onClick={onOpen}>Change Alarm sound</MenuItem>
+            <MenuItem onClick={handleClick}>change</MenuItem>
           </MenuList>
         </Menu>
         <ChangeAlarmModal isOpen={isOpen} onClose={onClose} />
