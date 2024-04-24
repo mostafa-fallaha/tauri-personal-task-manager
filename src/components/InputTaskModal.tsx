@@ -145,6 +145,9 @@ function InputTaskModal({ isOpen, onClose }: Props) {
               );
               setNewTaskText("");
               setNewTaskTitle("");
+              setHours(0);
+              setMinutes(0);
+              setSeconds(0);
               onClose();
             }}
           >

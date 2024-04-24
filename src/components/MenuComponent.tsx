@@ -68,7 +68,7 @@ function MenuComponent({ task }: Props) {
       <EditTaskModal
         isOpen={desc ? false : isOpen}
         onClose={onClose}
-        task={task}
+        id={task.id}
       />
     </Menu>
   );

@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+// use std::path::PathBuf;
 
 use crate::db;
 
@@ -8,7 +8,7 @@ use super::utils::date;
 use futures::executor::block_on;
 use sea_orm::entity::prelude::*;
 use sea_orm::{Order, QueryOrder, Set, TryIntoModel};
-use tauri::api::dialog::FileDialogBuilder;
+// use tauri::api::dialog::FileDialogBuilder;
 
 #[tauri::command(async)]
 pub async fn test_connection() -> Result<(), String> {
@@ -156,15 +156,15 @@ pub async fn update_task(
     }
 }
 
-#[tauri::command]
-pub fn select_file() {
-    FileDialogBuilder::new().pick_file(|f| {
-        match f {
-            Some(f) => {
-                println!("the file path: {:?}", f);
-                Ok(f)
-            }
-            None => Err("Error".to_owned()),
-        };
-    });
-}
+// #[tauri::command]
+// pub fn select_file() {
+//     FileDialogBuilder::new().pick_file(|f| {
+//         match f {
+//             Some(f) => {
+//                 println!("the file path: {:?}", f);
+//                 Ok(f)
+//             }
+//             None => Err("Error".to_owned()),
+//         };
+//     });
+// }

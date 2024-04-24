@@ -18,27 +18,38 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Task } from "../interfaces/Task";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { Task } from "../interfaces/Task";
 import convertDateToString from "../services/ConvertDateToString";
-import { AppDispatch } from "../state/store";
+import { AppDispatch, RootState } from "../state/store";
 import { updateTask } from "../state/task/taskSlice";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  task: Task;
+  id: number;
 }
 
-function EditTaskModal({ isOpen, onClose, task }: Props) {
+function EditTaskModal({ isOpen, onClose, id }: Props) {
+  const task = useSelector(
+    (state: RootState) => state.task.tasks.filter((t) => t.id === id)[0]
+  );
   const [hours2, minutes2, seconds2] = task.duration.split(":").map(Number);
-  const [newTaskTitle, setNewTaskTitle] = useState(task.title);
-  const [newTaskText, setNewTaskText] = useState(task.text);
-  const [hours, setHours] = useState<number>(hours2);
-  const [minutes, setMinutes] = useState<number>(minutes2);
-  const [seconds, setSeconds] = useState<number>(seconds2);
+  const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [newTaskText, setNewTaskText] = useState("");
+  const [hours, setHours] = useState<number>(0);
+  const [minutes, setMinutes] = useState<number>(0);
+  const [seconds, setSeconds] = useState<number>(0);
   const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    setNewTaskTitle(task.title);
+    setNewTaskText(task.text);
+    setHours(hours2);
+    setMinutes(minutes2);
+    setSeconds(seconds2);
+  }, [task]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
