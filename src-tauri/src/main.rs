@@ -16,6 +16,7 @@ mod utils;
 
 fn main() {
     // let connection = block_on(db::get_connection()).unwrap();
+    // block_on(commands::create_tasks_schema()).unwrap();
 
     tauri::Builder::default()
         // .manage(AppState(connection))
@@ -25,12 +26,13 @@ fn main() {
             commands::insert_task,
             commands::delete_task,
             commands::set_task_status,
-            commands::update_task
+            commands::update_task,
+            commands::get_categories
         ])
         // .setup(|_app| {
         //     // Initialize the database.
-        //     let _ = block_on(db::get_connection()).unwrap();
-        //     Ok(())
+        //     // let _connection = block_on(db::get_connection_tasks()).unwrap();
+        //     // Ok(())
         // })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

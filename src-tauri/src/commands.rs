@@ -2,6 +2,7 @@
 
 use crate::db;
 
+use super::db::entities::category;
 use super::db::entities::task;
 use super::utils::date;
 
@@ -12,7 +13,7 @@ use sea_orm::{Order, QueryOrder, Set, TryIntoModel};
 
 #[tauri::command(async)]
 pub async fn test_connection() -> Result<(), String> {
-    match block_on(super::db::get_connection()) {
+    match block_on(super::db::get_connection_tasks()) {
         Err(err) => Err(format!("{:?}", err)),
         _ => Ok(()),
     }
@@ -23,7 +24,7 @@ pub async fn get_tasks() -> Result<Vec<task::Model>, String> {
     // let state = app.state::<AppState>();
     // let connection = &state.0;
 
-    let connection = block_on(db::get_connection()).unwrap();
+    let connection = block_on(db::get_connection_tasks()).unwrap();
 
     match task::Entity::find()
         .order_by(task::Column::TaskDone, Order::Asc)
@@ -37,12 +38,23 @@ pub async fn get_tasks() -> Result<Vec<task::Model>, String> {
 }
 
 #[tauri::command(async)]
+pub async fn get_categories() -> Result<Vec<category::Model>, String> {
+    let connection = block_on(db::get_connection_categories()).unwrap();
+
+    match category::Entity::find().all(&connection).await {
+        Ok(categories) => Ok(categories),
+        Err(err) => Err(format!("{:?}", err)),
+    }
+}
+
+#[tauri::command(async)]
 pub async fn insert_task(
     new_title: &str,
     new_text: &str,
     new_duration: &str,
 ) -> Result<task::Model, String> {
-    let connection = block_on(db::get_connection()).unwrap();
+    println!("insertion\n");
+    let connection = block_on(db::get_connection_tasks()).unwrap();
 
     let date_added = date::get_local_date();
 
@@ -52,6 +64,7 @@ pub async fn insert_task(
         task_done: Set(false),
         duration: Set(new_duration.to_string()),
         date_added: Set(Some(date_added)),
+        category_id: Set(1),
         ..Default::default()
     };
 
@@ -68,17 +81,21 @@ pub async fn insert_task(
                 task_done: new_task.task_done,
                 duration: new_task.duration,
                 date_added: new_task.date_added,
+                category_id: new_task.category_id,
             };
             let new_task_3 = n.try_into_model().unwrap();
             Ok(new_task_3)
         }
-        Err(err) => Err(format!("{:?}", err)),
+        Err(err) => {
+            println!("insertion error: {:?}", err);
+            Err(format!("{:?}", err))
+        }
     }
 }
 
 #[tauri::command(async)]
 pub async fn delete_task(id: i32) -> Result<Vec<task::Model>, String> {
-    let connection = block_on(db::get_connection()).unwrap();
+    let connection = block_on(db::get_connection_tasks()).unwrap();
 
     let res = task::Entity::delete_many()
         .filter(task::Column::Id.eq(id))
@@ -99,7 +116,7 @@ pub async fn delete_task(id: i32) -> Result<Vec<task::Model>, String> {
 
 #[tauri::command(async)]
 pub async fn set_task_status(id: i32, task_done: bool) -> Result<Vec<task::Model>, String> {
-    let connection = block_on(db::get_connection()).unwrap();
+    let connection = block_on(db::get_connection_tasks()).unwrap();
 
     let model = task::Entity::find_by_id(id).one(&connection).await;
 
@@ -130,7 +147,7 @@ pub async fn update_task(
     new_text: &str,
     new_duration: &str,
 ) -> Result<Vec<task::Model>, String> {
-    let connection = block_on(db::get_connection()).unwrap();
+    let connection = block_on(db::get_connection_tasks()).unwrap();
 
     let model = task::Entity::find_by_id(id).one(&connection).await;
 
