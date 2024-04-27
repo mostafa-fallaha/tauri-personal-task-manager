@@ -4,6 +4,7 @@
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 
 mod commands;
+mod commands_cat;
 mod db;
 mod utils;
 
@@ -27,7 +28,11 @@ fn main() {
             commands::delete_task,
             commands::set_task_status,
             commands::update_task,
-            commands::get_categories
+            // commands::get_categories,
+            commands_cat::get_categories,
+            commands_cat::insert_category,
+            commands_cat::delete_category,
+            commands_cat::update_category
         ])
         // .setup(|_app| {
         //     // Initialize the database.

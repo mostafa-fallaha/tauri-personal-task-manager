@@ -2,7 +2,6 @@
 
 use crate::db;
 
-use super::db::entities::category;
 use super::db::entities::task;
 use super::utils::date;
 
@@ -33,16 +32,6 @@ pub async fn get_tasks() -> Result<Vec<task::Model>, String> {
         .await
     {
         Ok(tasks) => Ok(tasks),
-        Err(err) => Err(format!("{:?}", err)),
-    }
-}
-
-#[tauri::command(async)]
-pub async fn get_categories() -> Result<Vec<category::Model>, String> {
-    let connection = block_on(db::get_connection_categories()).unwrap();
-
-    match category::Entity::find().all(&connection).await {
-        Ok(categories) => Ok(categories),
         Err(err) => Err(format!("{:?}", err)),
     }
 }

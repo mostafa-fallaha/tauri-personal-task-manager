@@ -35,21 +35,21 @@ async fn _create_default_task(db: String) -> Result<(), String> {
     Ok(())
 }
 
-// async fn create_default_category(db: String) -> Result<(), String> {
-//     let connection = Database::connect(db).await.map_err(|e| e.to_string())?;
-//     let category_1 = category::ActiveModel {
-//         id: Set(1),
-//         title: Set("category 1".to_string()),
-//         ..Default::default()
-//     };
+async fn _create_default_category(db: String) -> Result<(), String> {
+    let connection = Database::connect(db).await.map_err(|e| e.to_string())?;
+    let category_1 = category::ActiveModel {
+        id: Set(1),
+        title: Set("category 1".to_string()),
+        ..Default::default()
+    };
 
-//     category::Entity::insert(category_1)
-//         .exec(&connection)
-//         .await
-//         .map_err(|e| e.to_string())?;
+    category::Entity::insert(category_1)
+        .exec(&connection)
+        .await
+        .map_err(|e| e.to_string())?;
 
-//     Ok(())
-// }
+    Ok(())
+}
 
 fn create_adta_folder() -> Result<PathBuf, String> {
     let home_dir = dirs::home_dir();
@@ -78,10 +78,10 @@ pub async fn get_connection_categories() -> Result<DatabaseConnection, String> {
     let db_sqlite = DatabaseBackend::Sqlite;
     let schema = Schema::new(db_sqlite);
 
-    let st2 = db_sqlite.build(&schema.create_table_from_entity(category::Entity));
-    let created2 = connection.execute(st2).await;
+    let st = db_sqlite.build(&schema.create_table_from_entity(category::Entity));
+    let created = connection.execute(st).await;
 
-    match created2 {
+    match created {
         Ok(v) => println!("success2: {:?}", v),
         Err(err) => println!("Error2: {:?}", err),
     }
