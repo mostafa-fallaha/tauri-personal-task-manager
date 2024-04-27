@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Task } from "../../interfaces/Task";
+import Task from "../../interfaces/Task";
 import { invoke } from "@tauri-apps/api/tauri";
 
 const initialState = {

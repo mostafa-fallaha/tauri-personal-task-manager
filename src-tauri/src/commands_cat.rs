@@ -51,13 +51,13 @@ pub async fn insert_category(title: &str) -> Result<category::Model, String> {
 }
 
 #[tauri::command(async)]
-pub async fn delete_category(id: i32) -> Result<(), String> {
+pub async fn delete_category(id: i32) -> Result<i32, String> {
     let connection = block_on(db::get_connection_categories()).unwrap();
 
     let res = category::Entity::delete_by_id(id).exec(&connection).await;
 
     match res {
-        Ok(_) => Ok(()),
+        Ok(_) => Ok(id),
         Err(err) => Err(format!("{:?}", err)),
     }
 }

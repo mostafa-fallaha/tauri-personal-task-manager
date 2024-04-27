@@ -1,33 +1,17 @@
-import {
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Grid,
-  GridItem,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
 import Home2 from "./components/tasks/Home2";
-import { IoSettingsSharp } from "react-icons/io5";
-import ChangeAlarmModal from "./components/tasks/ChangeAlarmModal";
-import { invoke } from "@tauri-apps/api/tauri";
-import { useEffect, useState } from "react";
-
-interface Category {
-  id: number;
-  title: string;
-}
+import Home from "./components/categories/Home";
 
 function App() {
-  const [categories, setCategories] = useState<Category[]>([]);
-  useEffect(() => {
-    invoke<Category[]>("get_categories")
-      .then((res) => {
-        setCategories(res);
-        console.log("nigggggggggggggggga");
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // const [categories, setCategories] = useState<Category[]>([]);
+  // useEffect(() => {
+  //   invoke<Category[]>("get_categories")
+  //     .then((res) => {
+  //       setCategories(res);
+  //       console.log("nigggggggggggggggga");
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   // const handleClick = async () => {
   //   await invoke<Category[]>("get_categories")
@@ -37,7 +21,7 @@ function App() {
   //     })
   //     .catch((err) => console.log(err));
   // };
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Grid
       templateAreas={{ base: `"aside main"` }}
@@ -45,31 +29,7 @@ function App() {
       height={"100svh"}
     >
       <GridItem area={"aside"} borderRight={"1px "}>
-        {/* <Button onClick={handleClick}>click</Button> */}
-        <ul>
-          {categories.map((c) => (
-            <li key={c.id}>{c.title}</li>
-          ))}
-        </ul>
-        <Menu>
-          <MenuButton
-            fontSize={"2rem"}
-            position={"absolute"}
-            bottom={"0"}
-            left={"0"}
-            marginBottom="3"
-            marginLeft="4"
-            background={"none"}
-            _hover={{ background: "none" }}
-          >
-            <IoSettingsSharp />
-          </MenuButton>
-          <MenuList>
-            <MenuItem onClick={onOpen}>Change Alarm sound</MenuItem>
-            {/* <MenuItem onClick={handleClick}>change</MenuItem> */}
-          </MenuList>
-        </Menu>
-        <ChangeAlarmModal isOpen={isOpen} onClose={onClose} />
+        <Home />
       </GridItem>
 
       <GridItem area={"main"}>
