@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 // import { IoMdDoneAll } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { Task } from "../../interfaces/Task";
+import Task from "../../interfaces/Task";
 // import getFirst4Words from "../services/GetFirst4Words";
 import { AppDispatch } from "../../state/store";
 import { deleteTask } from "../../state/task/taskSlice";

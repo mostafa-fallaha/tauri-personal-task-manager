@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../state/store";
 import { useEffect } from "react";
 import { getCategories } from "../../state/category/categorySlice";
+import CategoryBox from "./CategoryBox";
 
 function AsideHome() {
   const categories = useSelector(
@@ -26,11 +27,11 @@ function AsideHome() {
 
   return (
     <Box>
-      <ul>
+      <Box>
         {categories.map((c) => (
-          <li key={c.id}>{c.title}</li>
+          <CategoryBox category={c} />
         ))}
-      </ul>
+      </Box>
       <Menu>
         <MenuButton
           fontSize={"2rem"}
