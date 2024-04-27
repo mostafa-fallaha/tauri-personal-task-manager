@@ -7,9 +7,9 @@ import {
   GridItem,
   useDisclosure,
 } from "@chakra-ui/react";
-import Home2 from "./components/Home2";
+import Home2 from "./components/tasks/Home2";
 import { IoSettingsSharp } from "react-icons/io5";
-import ChangeAlarmModal from "./components/ChangeAlarmModal";
+import ChangeAlarmModal from "./components/tasks/ChangeAlarmModal";
 import { invoke } from "@tauri-apps/api/tauri";
 import { useEffect, useState } from "react";
 

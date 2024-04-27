@@ -2,15 +2,17 @@ import { Box } from "@chakra-ui/react";
 import TaskBox from "./TaskBox";
 // import { Task } from "../interfaces/Task";
 import { useSelector } from "react-redux";
-import { RootState } from "../state/store";
+import { RootState } from "../../state/store";
+// import { RootState } from "../state/store";
+// import { useSelector } from "react-redux";
 
 // interface Props {
 //   tasks: Task[];
 // }
 
-function UnfinishedTasks(/*{ tasks }: Props*/) {
+function FinishedTasks(/*{ tasks }: Props*/) {
   const tasks = useSelector((state: RootState) =>
-    state.task.tasks.filter((t) => t.task_done === false)
+    state.task.tasks.filter((t) => t.task_done === true)
   );
   return (
     <Box
@@ -27,4 +29,4 @@ function UnfinishedTasks(/*{ tasks }: Props*/) {
   );
 }
 
-export default UnfinishedTasks;
+export default FinishedTasks;

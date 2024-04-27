@@ -21,9 +21,9 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { Task } from "../interfaces/Task";
-import convertDateToString from "../services/ConvertDateToString";
-import { AppDispatch, RootState } from "../state/store";
-import { updateTask } from "../state/task/taskSlice";
+import convertDateToString from "../../services/ConvertDateToString";
+import { AppDispatch, RootState } from "../../state/store";
+import { updateTask } from "../../state/task/taskSlice";
 
 interface Props {
   isOpen: boolean;

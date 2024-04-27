@@ -20,9 +20,9 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../state/store";
-import { insertTask } from "../state/task/taskSlice";
-import convertDateToString from "../services/ConvertDateToString";
+import { AppDispatch } from "../../state/store";
+import { insertTask } from "../../state/task/taskSlice";
+import convertDateToString from "../../services/ConvertDateToString";
 
 interface Props {
   isOpen: boolean;

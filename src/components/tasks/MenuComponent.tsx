@@ -7,14 +7,14 @@ import {
 } from "@chakra-ui/react";
 
 import { SlOptionsVertical } from "react-icons/sl";
-import { Task } from "../interfaces/Task";
+import { Task } from "../../interfaces/Task";
 import TaskDescModal from "./TaskDescModal";
 // import InputTaskModal from "./InputTaskModal";
 import { useState } from "react";
 import EditTaskModal from "./EditTaskModal";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../state/store";
-import { setTaskStatus } from "../state/task/taskSlice";
+import { AppDispatch } from "../../state/store";
+import { setTaskStatus } from "../../state/task/taskSlice";
 
 interface Props {
   task: Task;

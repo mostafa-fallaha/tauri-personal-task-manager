@@ -10,8 +10,8 @@ import {
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
-import { Task } from "../interfaces/Task";
-import convert_to_date from "../services/ConvertToDate";
+import { Task } from "../../interfaces/Task";
+import convert_to_date from "../../services/ConvertToDate";
 import { LuTimer } from "react-icons/lu";
 
 interface Props {

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../state/store";
-import { getTasks } from "../state/task/taskSlice";
+import { AppDispatch, RootState } from "../../state/store";
+import { getTasks } from "../../state/task/taskSlice";
 import { Box, Button, Tooltip, useDisclosure } from "@chakra-ui/react";
 import { FaCirclePlus } from "react-icons/fa6";
 import InputTaskModal from "./InputTaskModal";
