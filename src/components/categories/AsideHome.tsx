@@ -13,7 +13,7 @@ import { AppDispatch, RootState } from "../../state/store";
 import { useEffect } from "react";
 import { getCategories } from "../../state/category/categorySlice";
 
-function Home() {
+function AsideHome() {
   const categories = useSelector(
     (state: RootState) => state.category.categories
   );
@@ -53,4 +53,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default AsideHome;

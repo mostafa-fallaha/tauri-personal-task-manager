@@ -10,7 +10,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UnfinishedTasks from "./UnfinishedTasks";
 import FinishedTasks from "./FinishedTasks";
 
-function Home2() {
+function MainHome() {
   const tasks = useSelector((state: RootState) => state.task.tasks);
   const dispatch = useDispatch<AppDispatch>();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -72,4 +72,4 @@ function Home2() {
   );
 }
 
-export default Home2;
+export default MainHome;
