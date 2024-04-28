@@ -1,8 +1,8 @@
 use futures::executor::block_on;
-use sea_orm::{ActiveModelTrait, EntityTrait, Set, TryIntoModel};
+use sea_orm::{ActiveModelTrait, ColumnTrait, EntityTrait, QueryFilter, Set, TryIntoModel};
 
 use super::db::entities::category;
-use crate::db;
+use crate::db::{self, entities::task};
 
 #[tauri::command(async)]
 pub async fn _test_connection_categories() -> Result<(), String> {
@@ -54,10 +54,20 @@ pub async fn insert_category(title: &str) -> Result<category::Model, String> {
 pub async fn delete_category(id: i32) -> Result<i32, String> {
     let connection = block_on(db::get_connection_categories()).unwrap();
 
-    let res = category::Entity::delete_by_id(id).exec(&connection).await;
+    let res1 = task::Entity::delete_many()
+        .filter(task::Column::CategoryId.eq(id))
+        .exec(&connection)
+        .await;
 
-    match res {
-        Ok(_) => Ok(id),
+    match res1 {
+        Ok(_) => {
+            let res = category::Entity::delete_by_id(id).exec(&connection).await;
+
+            match res {
+                Ok(_) => Ok(id),
+                Err(err) => Err(format!("{:?}", err)),
+            }
+        }
         Err(err) => Err(format!("{:?}", err)),
     }
 }

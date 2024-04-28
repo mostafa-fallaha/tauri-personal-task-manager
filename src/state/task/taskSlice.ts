@@ -42,15 +42,17 @@ interface InsertInterface {
   newTitle: string;
   newText: string;
   newDuration: string;
+  categoryId: number;
 }
 
 export const insertTask = createAsyncThunk<Task, InsertInterface>(
   "task/insertTask",
-  async ({ newTitle, newText, newDuration }: InsertInterface) => {
+  async ({ newTitle, newText, newDuration, categoryId }: InsertInterface) => {
     const res = await invoke<Task>("insert_task", {
       newTitle,
       newText,
       newDuration,
+      categoryId,
     });
     return res;
   }

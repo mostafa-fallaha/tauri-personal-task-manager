@@ -9,8 +9,9 @@ import { RootState } from "../../state/store";
 // }
 
 function UnfinishedTasks(/*{ tasks }: Props*/) {
+  const c = useSelector((state: RootState) => state.category.currentCategoryId);
   const tasks = useSelector((state: RootState) =>
-    state.task.tasks.filter((t) => t.task_done === false)
+    state.task.tasks.filter((t) => t.task_done === false && t.category_id === c)
   );
   return (
     <Box

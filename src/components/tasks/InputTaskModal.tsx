@@ -19,8 +19,8 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../state/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../state/store";
 import { insertTask } from "../../state/task/taskSlice";
 import convertDateToString from "../../services/ConvertDateToString";
 
@@ -30,6 +30,9 @@ interface Props {
 }
 
 function InputTaskModal({ isOpen, onClose }: Props) {
+  const categoryId = useSelector(
+    (state: RootState) => state.category.currentCategoryId
+  );
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [newTaskText, setNewTaskText] = useState("");
   const [hours, setHours] = useState<number>(0);
@@ -141,6 +144,7 @@ function InputTaskModal({ isOpen, onClose }: Props) {
                   newTitle: newTaskTitle,
                   newText: newTaskText,
                   newDuration: convertDateToString(hours, minutes, seconds),
+                  categoryId: categoryId,
                 })
               );
               setNewTaskText("");

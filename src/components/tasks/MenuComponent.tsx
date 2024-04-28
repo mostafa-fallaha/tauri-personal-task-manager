@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 
 import { SlOptionsVertical } from "react-icons/sl";
-import { Task } from "../../interfaces/Task";
+import Task from "../../interfaces/Task";
 import TaskDescModal from "./TaskDescModal";
 // import InputTaskModal from "./InputTaskModal";
 import { useState } from "react";

@@ -5,4 +5,5 @@ export default interface Task {
   task_done: boolean;
   duration: string;
   date_added: string;
+  category_id: number;
 }

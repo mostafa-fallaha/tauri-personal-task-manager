@@ -41,6 +41,7 @@ pub async fn insert_task(
     new_title: &str,
     new_text: &str,
     new_duration: &str,
+    category_id: i32,
 ) -> Result<task::Model, String> {
     println!("insertion\n");
     let connection = block_on(db::get_connection_tasks()).unwrap();
@@ -53,7 +54,7 @@ pub async fn insert_task(
         task_done: Set(false),
         duration: Set(new_duration.to_string()),
         date_added: Set(Some(date_added)),
-        category_id: Set(1),
+        category_id: Set(category_id),
         ..Default::default()
     };
 

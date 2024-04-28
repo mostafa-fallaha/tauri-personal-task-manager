@@ -4,18 +4,24 @@ import Category from "../../interfaces/category";
 
 const initialState = {
   categories: [] as Category[],
+  currentCategoryId: 0,
 };
 
 const categorySlice = createSlice({
   name: "category",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrCatId: (state, action: PayloadAction<number>) => {
+      state.currentCategoryId = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(
         getCategories.fulfilled,
         (state, action: PayloadAction<Category[]>) => {
           state.categories = action.payload;
+          state.currentCategoryId = action.payload[0].id;
         }
       )
       .addCase(
@@ -80,5 +86,7 @@ export const updateCategory = createAsyncThunk<
     return res;
   }
 );
+
+export const { setCurrCatId } = categorySlice.actions;
 
 export default categorySlice.reducer;
