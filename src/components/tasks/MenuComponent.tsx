@@ -12,15 +12,18 @@ import TaskDescModal from "./TaskDescModal";
 // import InputTaskModal from "./InputTaskModal";
 import { useState } from "react";
 import EditTaskModal from "./EditTaskModal";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../state/store";
-import { setTaskStatus } from "../../state/task/taskSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../state/store";
+import { setCurrTaskRunnig, setTaskStatus } from "../../state/task/taskSlice";
 
 interface Props {
   task: Task;
 }
 
 function MenuComponent({ task }: Props) {
+  const curRunTaskId = useSelector(
+    (state: RootState) => state.task.curRunTaskId
+  );
   const dispatch = useDispatch<AppDispatch>();
   const [desc, setDesc] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -47,14 +50,29 @@ function MenuComponent({ task }: Props) {
           Edit Task
         </MenuItem>
         <MenuItem
-          onClick={() =>
+          onClick={() => {
+            if (curRunTaskId === 0) dispatch(setCurrTaskRunnig(task.id));
+            else if (task.id === curRunTaskId) {
+              dispatch(setCurrTaskRunnig(0));
+            } else dispatch(setCurrTaskRunnig(task.id));
+          }}
+        >
+          {task.id !== curRunTaskId
+            ? "Prepare task to start"
+            : curRunTaskId !== 0
+            ? "Remove from Runnig Task"
+            : "Prepare task to start"}
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
             dispatch(
               setTaskStatus({
                 id: task.id,
                 taskDone: !task.task_done,
               })
-            )
-          }
+            );
+            if (task.id === curRunTaskId) dispatch(setCurrTaskRunnig(0));
+          }}
         >
           set Task as {task.task_done ? "unfinished" : "finished"}
         </MenuItem>

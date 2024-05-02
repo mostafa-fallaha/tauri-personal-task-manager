@@ -4,12 +4,17 @@ import { invoke } from "@tauri-apps/api/tauri";
 
 const initialState = {
   tasks: [] as Task[],
+  curRunTaskId: 0,
 };
 
 const taskSlice = createSlice({
   name: "task",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrTaskRunnig: (state, action: PayloadAction<number>) => {
+      state.curRunTaskId = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getTasks.fulfilled, (state, action: PayloadAction<Task[]>) => {
@@ -98,5 +103,7 @@ export const updateTask = createAsyncThunk<Task[], UpdateTaskInterface>(
     return res;
   }
 );
+
+export const { setCurrTaskRunnig } = taskSlice.actions;
 
 export default taskSlice.reducer;

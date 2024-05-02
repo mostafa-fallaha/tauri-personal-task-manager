@@ -22,7 +22,7 @@ function UnfinishedTasks(/*{ tasks }: Props*/) {
       justifyContent={"center"}
     >
       {tasks.map((task) => (
-        <TaskBox task={task} />
+        <TaskBox task={task} key={task.id} />
       ))}
     </Box>
   );

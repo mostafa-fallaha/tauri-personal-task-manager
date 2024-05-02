@@ -1,9 +1,18 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import Task from "../../interfaces/Task";
+import { RootState } from "../../state/store";
+import { useSelector } from "react-redux";
+// import TaskBox from "./TaskBox";
+import RunningTaskBox from "./RunningTaskBox";
 // import ColorSwitch from "./ColorSwitch";
 
 function NavBar() {
+  const curRunTask: Task | undefined = useSelector(
+    (state: RootState) =>
+      state.task.tasks.filter((t) => t.id === state.task.curRunTaskId)[0]
+  );
   const [isInF, setIsInF] = useState(false);
   return (
     <Box width={"100%"}>
@@ -32,6 +41,16 @@ function NavBar() {
           Finished
         </Button>
       </Link>
+      <Text fontSize={"1.2rem"} marginTop={"3%"} marginLeft={"5%"}>
+        Running Task
+      </Text>
+      <Box display={"flex"} justifyContent={"center"}>
+        {curRunTask === undefined ? (
+          <Text>no running task</Text>
+        ) : (
+          <RunningTaskBox task={curRunTask} key={curRunTask.id} />
+        )}
+      </Box>
 
       <Outlet />
       {/* <ColorSwitch /> */}
