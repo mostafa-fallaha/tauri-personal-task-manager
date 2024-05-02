@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Text } from "@chakra-ui/react";
+import { Box, Button, HStack, Text, useColorMode } from "@chakra-ui/react";
 // import { FaCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Category from "../../interfaces/category";
@@ -14,11 +14,19 @@ interface Props {
 function CategoryBox({ category }: Props) {
   const c = useSelector((state: RootState) => state.category.currentCategoryId);
   const dispatch = useDispatch();
-  // const colors = ["#c1121f", "#0077b6", "#ffca3a", "#7209b7", "#ff4d6d"];
+
+  const { colorMode } = useColorMode();
+
   return (
     <Box display={"flex"} justifyContent={"center"}>
       <Button
-        background={c === category.id ? "#B193F6" : "none"}
+        background={
+          c === category.id
+            ? colorMode === "dark"
+              ? "#383838"
+              : "#d3d3d3"
+            : "none"
+        }
         borderRadius={0}
         // borderLeft={"5px solid green"}
         width={"100%"}
@@ -28,7 +36,7 @@ function CategoryBox({ category }: Props) {
       >
         <HStack display={"flex"} justifyContent={"center"}>
           {/* <FaCircle color="green" /> */}
-          <MdOutlinePanoramaVerticalSelect />
+          <MdOutlinePanoramaVerticalSelect color={"#0077b6"} />
           <Text>{category.title}</Text>
         </HStack>
         <Box alignSelf={"center"}>

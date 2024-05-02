@@ -7,6 +7,7 @@ import {
   MenuList,
   Tooltip,
   useDisclosure,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { IoSettingsSharp } from "react-icons/io5";
@@ -24,6 +25,7 @@ function AsideHome() {
   );
   const dispatch = useDispatch<AppDispatch>();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { toggleColorMode, colorMode } = useColorMode();
 
   const [addCat, setAddCat] = useState(false);
 
@@ -65,6 +67,9 @@ function AsideHome() {
         </MenuButton>
         <MenuList>
           <MenuItem onClick={onOpen}>Change Alarm sound</MenuItem>
+          <MenuItem onClick={() => toggleColorMode()}>
+            Change to {colorMode === "dark" ? "light" : "dark"} theme
+          </MenuItem>
         </MenuList>
       </Menu>
       <ChangeAlarmModal isOpen={isOpen} onClose={onClose} />
