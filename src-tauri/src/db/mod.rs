@@ -35,11 +35,11 @@ async fn _create_default_task(db: String) -> Result<(), String> {
     Ok(())
 }
 
-async fn _create_default_category(db: String) -> Result<(), String> {
+async fn create_default_category(db: String) -> Result<(), String> {
     let connection = Database::connect(db).await.map_err(|e| e.to_string())?;
     let category_1 = category::ActiveModel {
         id: Set(1),
-        title: Set("category 1".to_string()),
+        title: Set("Default".to_string()),
         ..Default::default()
     };
 
@@ -84,6 +84,11 @@ pub async fn get_connection_categories() -> Result<DatabaseConnection, String> {
     match created {
         Ok(v) => println!("success2: {:?}", v),
         Err(err) => println!("Error2: {:?}", err),
+    }
+
+    match create_default_category(db).await {
+        Ok(_v) => println!("Default category added"),
+        Err(err) => println!("Error adding default category: {:?}", err),
     }
 
     Ok(connection)

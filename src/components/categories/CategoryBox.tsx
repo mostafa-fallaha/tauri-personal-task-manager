@@ -39,9 +39,11 @@ function CategoryBox({ category }: Props) {
           <MdOutlinePanoramaVerticalSelect color={"#0077b6"} />
           <Text>{category.title}</Text>
         </HStack>
-        <Box alignSelf={"center"}>
-          <CategoryMenu id={category.id} />
-        </Box>
+        {category.id !== 1 && (
+          <Box alignSelf={"center"}>
+            <CategoryMenu id={category.id} />
+          </Box>
+        )}
       </Button>
     </Box>
   );
