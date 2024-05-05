@@ -9,7 +9,7 @@ import {
   useDisclosure,
   useColorMode,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoSettingsSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../state/category/categorySlice";
@@ -29,6 +29,8 @@ function AsideHome() {
 
   const [addCat, setAddCat] = useState(false);
 
+  const boxRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -39,13 +41,23 @@ function AsideHome() {
         <Button
           background={"none"}
           _hover={{ background: "none" }}
-          onClick={() => setAddCat(true)}
+          onClick={() => {
+            setAddCat(true);
+            if (boxRef.current) {
+              boxRef.current.scrollTop = boxRef.current.scrollHeight;
+            }
+          }}
         >
           <FaPlus />
         </Button>
       </Tooltip>
 
-      <Box>
+      <Box
+        height={{ sm: "80svh", md: "80svh", lg: "88svh" }}
+        overflowY={"auto"}
+        ref={boxRef}
+        // borderBottom={"1px"}
+      >
         {categories.map((c) => (
           <CategoryBox category={c} />
         ))}
