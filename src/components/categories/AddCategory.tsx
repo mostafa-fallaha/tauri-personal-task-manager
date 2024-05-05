@@ -3,9 +3,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../state/store";
 import { insertCategory } from "../../state/category/categorySlice";
+import { FaTimes } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa6";
 
 interface Props {
-  categoryAdded: () => void;
+  categoryAdded: (v: boolean) => void;
 }
 
 function AddCategory({ categoryAdded }: Props) {
@@ -20,12 +22,16 @@ function AddCategory({ categoryAdded }: Props) {
         onChange={(e) => setCatTitle(e.target.value)}
       ></Input>
       <Button
+        borderRadius={0}
         onClick={() => {
           dispatch(insertCategory(catTitle));
-          categoryAdded();
+          categoryAdded(false);
         }}
       >
-        Add
+        <FaCheck size={"100%"} />
+      </Button>
+      <Button borderRadius={0} onClick={() => categoryAdded(false)}>
+        <FaTimes size={"100%"} />
       </Button>
     </HStack>
   );

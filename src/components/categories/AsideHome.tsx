@@ -49,7 +49,7 @@ function AsideHome() {
         {categories.map((c) => (
           <CategoryBox category={c} />
         ))}
-        {addCat && <AddCategory categoryAdded={() => setAddCat(false)} />}
+        {addCat && <AddCategory categoryAdded={(v) => setAddCat(v)} />}
       </Box>
 
       <Menu>
