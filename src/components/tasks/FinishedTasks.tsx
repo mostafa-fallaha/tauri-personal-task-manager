@@ -16,13 +16,15 @@ function FinishedTasks(/*{ tasks }: Props*/) {
   return (
     <Box
       width={"100%"}
-      display={"flex"}
-      flexWrap={"wrap"}
+      // display={"flex"}
+      // flexWrap={"wrap"}
       marginTop={"5%"}
-      justifyContent={"center"}
+      // justifyContent={"center"}
+      height={"60svh"}
+      overflowY={"auto"}
     >
-      {tasks.map((task) => (
-        <TaskBox task={task} key={task.id} />
+      {tasks.map((task, index) => (
+        <TaskBox task={task} index={index} key={task.id} />
       ))}
     </Box>
   );

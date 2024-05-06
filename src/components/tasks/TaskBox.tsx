@@ -8,11 +8,12 @@ import MenuComponent from "./MenuComponent";
 
 interface Props {
   task: Task;
+  index: number;
 }
 
 // check point 3
 
-function TaskBox({ task }: Props) {
+function TaskBox({ task, index }: Props) {
   const dispatch = useDispatch<AppDispatch>();
 
   return (
@@ -20,11 +21,11 @@ function TaskBox({ task }: Props) {
       display={"flex"}
       justifyContent={"space-around"}
       alignItems={"center"}
-      width={"90%"}
-      height={"5svh"}
-      marginTop={"1%"}
+      height={"7svh"}
+      backgroundColor={index % 2 === 0 ? "#ededed" : "#ffffff"}
+      // marginTop={"1%"}
       gap={1}
-      border={"1px"}
+      // borderBottom={"1px"}
       // borderRadius={"10px"}
     >
       <Text width={"40%"}>{task.title}</Text>
