@@ -1,6 +1,8 @@
 import {
   Box,
   Button,
+  CircularProgress,
+  CircularProgressLabel,
   // Checkbox,
   HStack,
   Text,
@@ -8,19 +10,18 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { MdDelete } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import Task from "../../interfaces/Task";
-import { AppDispatch, RootState } from "../../state/store";
-import { deleteTask } from "../../state/task/taskSlice";
 import {
   VscDebugContinue,
   VscDebugPause,
   VscDebugRestart,
   VscDebugStart,
 } from "react-icons/vsc";
+import { useDispatch, useSelector } from "react-redux";
+import Task from "../../interfaces/Task";
+import { AppDispatch, RootState } from "../../state/store";
 import AlarmModal from "./AlarmModal";
-import MenuComponent from "./MenuComponent";
+import { FaLevelDownAlt } from "react-icons/fa";
+import { setCurrTaskRunnig } from "../../state/task/taskSlice";
 
 interface Props {
   task: Task;
@@ -32,6 +33,11 @@ function TaskBox({ task }: Props) {
   const curRunTaskId = useSelector(
     (state: RootState) => state.task.curRunTaskId
   );
+  const curRunCat = useSelector(
+    (state: RootState) =>
+      state.category.categories.filter((c) => c.id === task.category_id)[0]
+  );
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -40,11 +46,13 @@ function TaskBox({ task }: Props) {
   const [timeLeft, setTimeLeft] = useState("");
   const [remainingSeconds, setRemainingSeconds] = useState(0);
   const [alarm] = useState(new Audio("a.mp3"));
+  const [sizePer, setSizePer] = useState<number>(0);
 
   useEffect(() => {
     if (isRunning) {
       const intervalID = setInterval(() => {
         if (remainingSeconds > 0) {
+          getDurationPrecentage();
           setRemainingSeconds((prev) => prev - 1);
           const hoursLeft = Math.floor(remainingSeconds / 3600);
           const minutesLeft = Math.floor((remainingSeconds % 3600) / 60);
@@ -55,6 +63,8 @@ function TaskBox({ task }: Props) {
               .padStart(2, "0")}:${secondsLeft.toString().padStart(2, "0")}`
           );
         } else {
+          getDurationPrecentage();
+          setSizePer(0);
           setTimeLeft("00:00:00");
           playAlarm();
           setIsRunning(false);
@@ -89,16 +99,103 @@ function TaskBox({ task }: Props) {
     alarm.pause();
   };
 
+  const getDurationPrecentage = () => {
+    const [hours, minutes, seconds] = task.duration.split(":").map(Number);
+    const duration = hours * 3600 + minutes * 60 + seconds;
+    const percentage = ((duration - remainingSeconds) / duration) * 100;
+    setSizePer(percentage);
+  };
+
   return (
-    <Box
+    <Box display={"flex"} justifyContent={"space-evenly"} alignItems={"center"}>
+      <Box width={"50%"}>
+        <HStack>
+          <Text>{task.title}</Text>
+          <Text>
+            {"["}
+            {curRunCat.title}
+            {"]"}
+          </Text>
+        </HStack>
+      </Box>
+      <Box>
+        <Tooltip label="start">
+          <Button
+            isDisabled={!first || curRunTaskId !== task.id}
+            background={"none"}
+            _hover={{ background: "none" }}
+            onClick={() => {
+              startCountdown();
+            }}
+          >
+            <VscDebugStart />
+          </Button>
+        </Tooltip>
+
+        <Tooltip label={first ? "pause" : isRunning ? "pause" : "continue"}>
+          <Button
+            isDisabled={first}
+            background={"none"}
+            _hover={{ background: "none" }}
+            onClick={pauseCountdown}
+          >
+            {first ? (
+              <VscDebugPause />
+            ) : isRunning ? (
+              <VscDebugPause />
+            ) : (
+              <VscDebugContinue />
+            )}
+          </Button>
+        </Tooltip>
+
+        <CircularProgress value={sizePer} size={"75px"}>
+          <CircularProgressLabel>
+            <Text fontSize={"0.8rem"}>{first ? task.duration : timeLeft}</Text>
+          </CircularProgressLabel>
+        </CircularProgress>
+
+        <Tooltip label="restart">
+          <Button
+            isDisabled={first}
+            background={"none"}
+            _hover={{ background: "none" }}
+            onClick={() => {
+              setIsRunning(false);
+              setFirst(true);
+              setSizePer(0);
+            }}
+          >
+            <VscDebugRestart />
+          </Button>
+        </Tooltip>
+        <AlarmModal
+          isOpen={isOpen}
+          onClose={() => {
+            onClose();
+            stopAlarm();
+          }}
+        />
+      </Box>
+      <Tooltip label="Remove from running task">
+        <Button
+          background={"none"}
+          _hover={{ background: "none" }}
+          onClick={() => dispatch(setCurrTaskRunnig(0))}
+        >
+          <FaLevelDownAlt />
+        </Button>
+      </Tooltip>
+    </Box>
+    /*<Box
       display={"flex"}
       justifyContent={"space-around"}
       alignItems={"center"}
-      width={"90%"}
-      height={"5svh"}
+      // width={"90%"}
+      height={"7svh"}
       marginTop={"1%"}
-      gap={1}
-      border={"1px"}
+      backgroundColor={"lightblue"}
+      // border={"1px"}
       //   borderRadius={"10px"}
     >
       <Text width={"40%"}>{task.title}</Text>
@@ -168,7 +265,7 @@ function TaskBox({ task }: Props) {
           stopAlarm();
         }}
       />
-    </Box>
+    </Box>*/
   );
 }
 

@@ -51,17 +51,19 @@ function MenuComponent({ task }: Props) {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            if (curRunTaskId === 0) dispatch(setCurrTaskRunnig(task.id));
-            else if (task.id === curRunTaskId) {
-              dispatch(setCurrTaskRunnig(0));
-            } else dispatch(setCurrTaskRunnig(task.id));
+            dispatch(setCurrTaskRunnig(task.id));
+            // if (curRunTaskId === 0)
+            // else if (task.id === curRunTaskId) {
+            //   dispatch(setCurrTaskRunnig(0));
+            // } else dispatch(setCurrTaskRunnig(task.id));
           }}
         >
-          {task.id !== curRunTaskId
+          Prepare task to start
+          {/* {task.id !== curRunTaskId
             ? "Prepare task to start"
             : curRunTaskId !== 0
             ? "Remove from Runnig Task"
-            : "Prepare task to start"}
+            : "Prepare task to start"} */}
         </MenuItem>
         <MenuItem
           onClick={() => {

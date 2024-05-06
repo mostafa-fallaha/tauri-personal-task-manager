@@ -41,12 +41,17 @@ function NavBar() {
           Finished
         </Button>
       </Link>
-      <Text fontSize={"1.2rem"} marginTop={"3%"} marginLeft={"5%"}>
+      <Text
+        fontSize={"1.2rem"}
+        marginTop={"3%"}
+        alignSelf={"center"}
+        textAlign={"center"}
+      >
         Running Task
       </Text>
-      <Box display={"flex"} justifyContent={"center"}>
+      <Box height={"10svh"}>
         {curRunTask === undefined ? (
-          <Text>no running task</Text>
+          <Text textAlign={"center"}>no running task</Text>
         ) : (
           <RunningTaskBox task={curRunTask} key={curRunTask.id} />
         )}
