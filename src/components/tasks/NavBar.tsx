@@ -6,14 +6,10 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-// import { useState } from "react";
-// import { Link, Outlet } from "react-router-dom";
 import Task from "../../interfaces/Task";
 import { RootState } from "../../state/store";
 import { useSelector } from "react-redux";
-// import TaskBox from "./TaskBox";
 import RunningTaskBox from "./RunningTaskBox";
-// import ColorSwitch from "./ColorSwitch";
 import { GoPlus } from "react-icons/go";
 import InputTaskModal from "./InputTaskModal";
 
@@ -28,49 +24,33 @@ function NavBar({ changeTaskStat }: Props) {
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const [isInF, setIsInF] = useState(false);
   return (
-    <Box width={"100%"}>
-      {/* <Link to="/">
-        <Button
-          width={"50%"}
-          background={"none"}
-          borderRadius={0}
-          borderRight={"1px"}
-          fontSize={isInF ? "1.2rem" : "1.5rem"}
-          onClick={() => setIsInF(false)}
-        >
-          Unfinished
-        </Button>
-      </Link>
+    <Box marginLeft={"1%"} marginRight={"1%"}>
+      <Box width={"100%"} display={"flex"} gap={2}>
+        {/* =============== Running Task =========================================== */}
 
-      <Link to="/finished">
-        <Button
-          width={"50%"}
-          background={"none"}
-          borderRadius={0}
-          borderLeft={"1px"}
-          fontSize={isInF ? "1.5rem" : "1.2rem"}
-          onClick={() => setIsInF(true)}
-        >
-          Finished
-        </Button>
-      </Link> */}
-      <Text
-        fontSize={"1.2rem"}
-        // marginTop={"3%"}
-        alignSelf={"center"}
-        textAlign={"center"}
-      >
-        Running Task
-      </Text>
-      <Box height={"10svh"} backgroundColor={"lightgreen"}>
-        {curRunTask === undefined ? (
-          <Text textAlign={"center"}>no running task</Text>
-        ) : (
-          <RunningTaskBox task={curRunTask} key={curRunTask.id} />
-        )}
+        <Box width={"50%"} backgroundColor={"#b3b3b3"} borderRadius={"2px"}>
+          <Text fontSize={"1.2rem"} alignSelf={"center"} textAlign={"center"}>
+            Running Task
+          </Text>
+          <Box height={"10svh"}>
+            {curRunTask === undefined ? (
+              <Text textAlign={"center"}>no running task</Text>
+            ) : (
+              <RunningTaskBox task={curRunTask} key={curRunTask.id} />
+            )}
+          </Box>
+          <InputTaskModal isOpen={isOpen} onClose={onClose} />
+        </Box>
+
+        {/* =============== All Tasks Details =========================================== */}
+
+        <Box width={"50%"} backgroundColor={"#b3b3b3"} borderRadius={"2px"}>
+          Test
+        </Box>
       </Box>
+
+      {/* =============== Tasks Functions =========================================== */}
 
       <HStack
         display={"flex"}
@@ -78,8 +58,7 @@ function NavBar({ changeTaskStat }: Props) {
         justifyContent={"space-between"}
       >
         <Select
-          // variant={"flushed"}
-          backgroundColor={"#ededed"}
+          backgroundColor={"#b3b3b3"}
           borderRadius={0}
           border={0}
           width={"30%"}
@@ -96,16 +75,17 @@ function NavBar({ changeTaskStat }: Props) {
 
           <option value="Finished">Finished tasks</option>
         </Select>
-        <Button onClick={() => onOpen()} borderRadius={0}>
+        <Button
+          onClick={() => onOpen()}
+          borderRadius={0}
+          backgroundColor={"#b3b3b3"}
+        >
           <HStack display={"flex"} justifyContent={"center"}>
             <GoPlus />
             <Text>Add a new Task</Text>
           </HStack>
         </Button>
       </HStack>
-      <InputTaskModal isOpen={isOpen} onClose={onClose} />
-      {/* <Outlet /> */}
-      {/* <ColorSwitch /> */}
     </Box>
   );
 }

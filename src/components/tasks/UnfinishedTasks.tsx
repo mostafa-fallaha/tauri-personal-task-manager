@@ -1,6 +1,5 @@
 import { Box } from "@chakra-ui/react";
 import TaskBox from "./TaskBox";
-// import { Task } from "../interfaces/Task";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 
@@ -17,19 +16,16 @@ function UnfinishedTasks({ taskStatus }: Props) {
   );
   return (
     <Box
-      width={"100%"}
-      // backgroundColor={"#fcfcfc"}
-      // display={"flex"}
-      // flexWrap={"wrap"}
-      marginTop={"0%"}
-      // justifyContent={"center"}
-      // height={"60svh"}
+      marginTop={"%"}
       overflowY={"auto"}
-      // borderBottom={"1px solid #a0a0a0"}
+      marginLeft={"1%"}
+      marginRight={"1%"}
       borderTop={"1px solid #a0a0a0"}
+      backgroundColor={"#b3b3b3"}
+      borderRadius={"2px"}
     >
-      {tasks.map((task, index) => (
-        <TaskBox task={task} index={index} key={task.id} />
+      {tasks.map((task) => (
+        <TaskBox task={task} key={task.id} />
       ))}
     </Box>
   );

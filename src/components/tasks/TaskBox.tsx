@@ -8,12 +8,11 @@ import MenuComponent from "./MenuComponent";
 
 interface Props {
   task: Task;
-  index: number;
 }
 
 // check point 3
 
-function TaskBox({ task, index }: Props) {
+function TaskBox({ task }: Props) {
   const dispatch = useDispatch<AppDispatch>();
 
   return (
