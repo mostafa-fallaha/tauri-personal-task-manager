@@ -43,7 +43,7 @@ function TaskDescModal({ isOpen, onClose, task }: Props) {
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="purple" mr={3} onClick={onClose}>
+          <Button variant="ghost" mr={3} onClick={onClose}>
             close
           </Button>
         </ModalFooter>

@@ -31,8 +31,8 @@ function CategoryBox({ category }: Props) {
         background={
           c === category.id
             ? colorMode === "dark"
-              ? "#383838"
-              : "#d3d3d3"
+              ? "#145caf"
+              : "#83c1fc"
             : "none"
         }
         borderRadius={0}

@@ -30,7 +30,7 @@ function NavBar({ changeTaskStat }: Props) {
       <Box width={"100%"} display={"flex"} gap={2} height={"20svh"}>
         {/* =============== Running Task =========================================== */}
 
-        <Box width={"50%"} backgroundColor={"#b3b3b3"} borderRadius={"2px"}>
+        <Box width={"50%"} backgroundColor={"#83c1fc"} borderRadius={"2px"}>
           <Text fontSize={"1.2rem"} alignSelf={"center"} textAlign={"center"}>
             Running Task
           </Text>
@@ -46,7 +46,7 @@ function NavBar({ changeTaskStat }: Props) {
 
         {/* =============== All Tasks Details =========================================== */}
 
-        <Box width={"50%"} backgroundColor={"#b3b3b3"} borderRadius={"2px"}>
+        <Box width={"50%"} backgroundColor={"#83c1fc"} borderRadius={"2px"}>
           <Text fontSize={"1.2rem"} alignSelf={"center"} textAlign={"center"}>
             Your Progress
           </Text>
@@ -62,7 +62,7 @@ function NavBar({ changeTaskStat }: Props) {
         justifyContent={"space-between"}
       >
         <Select
-          backgroundColor={"#b3b3b3"}
+          backgroundColor={"#83c1fc"}
           borderRadius={0}
           border={0}
           width={"30%"}
@@ -82,7 +82,8 @@ function NavBar({ changeTaskStat }: Props) {
         <Button
           onClick={() => onOpen()}
           borderRadius={0}
-          backgroundColor={"#b3b3b3"}
+          backgroundColor={"#83c1fc"}
+          _hover={{ backgroundColor: "#b3daff" }}
         >
           <HStack display={"flex"} justifyContent={"center"}>
             <GoPlus />

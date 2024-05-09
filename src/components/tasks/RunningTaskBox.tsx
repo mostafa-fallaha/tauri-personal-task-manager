@@ -152,7 +152,7 @@ function TaskBox({ task }: Props) {
           </Button>
         </Tooltip>
 
-        <CircularProgress value={sizePer} size={"100px"}>
+        <CircularProgress value={sizePer} size={"100px"} color="lightgreen">
           <CircularProgressLabel>
             <Text fontSize={"0.8rem"}>{first ? task.duration : timeLeft}</Text>
           </CircularProgressLabel>
@@ -190,85 +190,6 @@ function TaskBox({ task }: Props) {
         </Button>
       </Tooltip>
     </Box>
-    /*<Box
-      display={"flex"}
-      justifyContent={"space-around"}
-      alignItems={"center"}
-      // width={"90%"}
-      height={"7svh"}
-      marginTop={"1%"}
-      backgroundColor={"lightblue"}
-      // border={"1px"}
-      //   borderRadius={"10px"}
-    >
-      <Text width={"40%"}>{task.title}</Text>
-
-      <Tooltip label="start">
-        <Button
-          isDisabled={!first || curRunTaskId !== task.id}
-          background={"none"}
-          _hover={{ background: "none" }}
-          onClick={() => {
-            startCountdown();
-          }}
-        >
-          <VscDebugStart />
-        </Button>
-      </Tooltip>
-
-      <Tooltip label={first ? "pause" : isRunning ? "pause" : "continue"}>
-        <Button
-          isDisabled={first}
-          background={"none"}
-          _hover={{ background: "none" }}
-          onClick={pauseCountdown}
-        >
-          {first ? (
-            <VscDebugPause />
-          ) : isRunning ? (
-            <VscDebugPause />
-          ) : (
-            <VscDebugContinue />
-          )}
-        </Button>
-      </Tooltip>
-
-      <Text>{first ? task.duration : timeLeft}</Text>
-
-      <Tooltip label="restart">
-        <Button
-          isDisabled={first}
-          background={"none"}
-          _hover={{ background: "none" }}
-          onClick={() => {
-            setIsRunning(false);
-            setFirst(true);
-          }}
-        >
-          <VscDebugRestart />
-        </Button>
-      </Tooltip>
-
-      <HStack>
-        <Button
-          background={"none"}
-          _hover={{ background: "none", color: "red" }}
-          onClick={() => dispatch(deleteTask(task.id))}
-        >
-          <MdDelete size={"75%"} />
-        </Button>
-
-        <MenuComponent task={task} />
-      </HStack>
-
-      <AlarmModal
-        isOpen={isOpen}
-        onClose={() => {
-          onClose();
-          stopAlarm();
-        }}
-      />
-    </Box>*/
   );
 }
 

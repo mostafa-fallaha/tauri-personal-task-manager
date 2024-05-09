@@ -24,7 +24,7 @@ function TaskBox({ task }: Props) {
       // backgroundColor={index % 2 === 0 ? "#ededed" : "#ffffff"}
       // marginTop={"1%"}
       gap={1}
-      borderBottom={"1px solid #d3d3d3"}
+      borderBottom={"1px solid #e0f4ff"}
       // borderRadius={"10px"}
     >
       <Text width={"40%"}>{task.title}</Text>

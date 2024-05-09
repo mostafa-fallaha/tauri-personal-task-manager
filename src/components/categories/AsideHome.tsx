@@ -1,23 +1,11 @@
-import {
-  Box,
-  Button,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Tooltip,
-  useDisclosure,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Box, Button, Tooltip } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
-import { IoSettingsSharp } from "react-icons/io5";
+import { FaPlus } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../state/category/categorySlice";
 import { AppDispatch, RootState } from "../../state/store";
-import CategoryBox from "./CategoryBox";
-import ChangeAlarmModal from "./ChangeAlarmModal";
 import AddCategory from "./AddCategory";
-import { FaPlus } from "react-icons/fa6";
+import CategoryBox from "./CategoryBox";
 
 interface Props {
   setNewSize: (size: number) => void;
@@ -28,8 +16,6 @@ function AsideHome({ setNewSize }: Props) {
     (state: RootState) => state.category.categories
   );
   const dispatch = useDispatch<AppDispatch>();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { toggleColorMode, colorMode } = useColorMode();
 
   const [addCat, setAddCat] = useState(false);
   // const [width, setWidth] = useState<number>(250);
@@ -90,7 +76,7 @@ function AsideHome({ setNewSize }: Props) {
           {addCat && <AddCategory categoryAdded={(v) => setAddCat(v)} />}
         </Box>
 
-        <Menu>
+        {/* <Menu>
           <MenuButton
             fontSize={"2rem"}
             position={"absolute"}
@@ -110,7 +96,7 @@ function AsideHome({ setNewSize }: Props) {
             </MenuItem>
           </MenuList>
         </Menu>
-        <ChangeAlarmModal isOpen={isOpen} onClose={onClose} />
+        <ChangeAlarmModal isOpen={isOpen} onClose={onClose} /> */}
       </Box>
       <Box
         onMouseDown={handleResize}
