@@ -29,7 +29,7 @@ function AlarmModal({ isOpen, onClose }: Props) {
           <ModalBody>Your task time is over</ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="purple" mr={3} onClick={onClose}>
+            <Button variant={"ghost"} mr={3} onClick={onClose}>
               Close
             </Button>
           </ModalFooter>

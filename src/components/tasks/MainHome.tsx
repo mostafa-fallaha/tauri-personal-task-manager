@@ -1,19 +1,18 @@
-import { useEffect } from "react";
+import { Box } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../state/store";
 import { getTasks } from "../../state/task/taskSlice";
-import { Box, Button, Tooltip, useDisclosure } from "@chakra-ui/react";
-import { FaCirclePlus } from "react-icons/fa6";
-import InputTaskModal from "./InputTaskModal";
 import NavBar from "./NavBar";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UnfinishedTasks from "./UnfinishedTasks";
-import FinishedTasks from "./FinishedTasks";
+// import FinishedTasks from "./FinishedTasks";
 
 function MainHome() {
   const tasks = useSelector((state: RootState) => state.task.tasks);
   const dispatch = useDispatch<AppDispatch>();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
+  const [taskStatus, setTaskStatus] = useState(false);
 
   useEffect(() => {
     dispatch(getTasks());
@@ -28,32 +27,24 @@ function MainHome() {
         marginTop="4"
         marginRight="8"
       ></Box>
-
-      <InputTaskModal isOpen={isOpen} onClose={onClose} />
-      <BrowserRouter>
+      <NavBar changeTaskStat={(stat) => setTaskStatus(stat)} />
+      <UnfinishedTasks taskStatus={taskStatus} />
+      {/* <BrowserRouter>
         <Routes>
-          <Route path="/" element={<NavBar />}>
+          <Route
+            path="/"
+            element={<NavBar changeTaskStat={(stat) => setTaskStatus(stat)} />}
+          >
             <Route
               index
-              element={
-                <UnfinishedTasks
-                // tasks={tasks.filter((t) => t.task_done === false)}
-                />
-              }
+              element={<UnfinishedTasks taskStatus={taskStatus} />}
             />
-            <Route
-              path="finished"
-              element={
-                <FinishedTasks
-                // tasks={tasks.filter((t) => t.task_done === true)}
-                />
-              }
-            />
+            <Route path="finished" element={<FinishedTasks />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
 
-      <Tooltip label="Add a new Task">
+      {/* <Tooltip label="Add a new Task">
         <Button
           fontSize={"3rem"}
           position={"absolute"}
@@ -67,7 +58,7 @@ function MainHome() {
         >
           <FaCirclePlus />
         </Button>
-      </Tooltip>
+      </Tooltip> */}
     </Box>
   );
 }
