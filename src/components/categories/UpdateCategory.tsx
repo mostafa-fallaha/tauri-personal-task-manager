@@ -22,7 +22,7 @@ function UpdateCategory({ editingCat, id }: Props) {
         value={catTitle}
         borderRadius={0}
         onChange={(e) => setCatTitle(e.target.value)}
-      ></Input>
+      />
       <Button
         borderRadius={0}
         onClick={() => {

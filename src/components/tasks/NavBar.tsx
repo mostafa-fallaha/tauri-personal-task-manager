@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import RunningTaskBox from "./RunningTaskBox";
 import { GoPlus } from "react-icons/go";
 import InputTaskModal from "./InputTaskModal";
+import TasksDashboard from "./TasksDashboard";
 
 interface Props {
   changeTaskStat: (stat: boolean) => void;
@@ -46,7 +47,10 @@ function NavBar({ changeTaskStat }: Props) {
         {/* =============== All Tasks Details =========================================== */}
 
         <Box width={"50%"} backgroundColor={"#b3b3b3"} borderRadius={"2px"}>
-          Test
+          <Text fontSize={"1.2rem"} alignSelf={"center"} textAlign={"center"}>
+            Your Progress
+          </Text>
+          <TasksDashboard />
         </Box>
       </Box>
 

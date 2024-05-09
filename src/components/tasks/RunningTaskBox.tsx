@@ -110,7 +110,7 @@ function TaskBox({ task }: Props) {
   return (
     <Box display={"flex"} justifyContent={"space-evenly"} alignItems={"center"}>
       <Box width={"50%"}>
-        <HStack>
+        <HStack marginLeft={"5%"}>
           <VStack display={"flex"} alignItems={"flex-start"}>
             <Text>{task.title}</Text>
             <Text>
