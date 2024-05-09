@@ -6,6 +6,8 @@ import { setCurrCatId } from "../../state/category/categorySlice";
 import { RootState } from "../../state/store";
 import CategoryMenu from "./CategoryMenu";
 import { MdOutlinePanoramaVerticalSelect } from "react-icons/md";
+import { useState } from "react";
+import UpdateCategory from "./UpdateCategory";
 
 interface Props {
   category: Category;
@@ -14,8 +16,14 @@ interface Props {
 function CategoryBox({ category }: Props) {
   const c = useSelector((state: RootState) => state.category.currentCategoryId);
   const dispatch = useDispatch();
+  const [editingCat, setEditingCat] = useState(false);
 
   const { colorMode } = useColorMode();
+
+  if (editingCat && c === category.id)
+    return (
+      <UpdateCategory id={category.id} editingCat={(v) => setEditingCat(v)} />
+    );
 
   return (
     <Box display={"flex"} justifyContent={"center"}>
@@ -41,7 +49,10 @@ function CategoryBox({ category }: Props) {
         </HStack>
         {category.id !== 1 && (
           <Box alignSelf={"center"}>
-            <CategoryMenu id={category.id} />
+            <CategoryMenu
+              id={category.id}
+              editingCat={(v) => setEditingCat(v)}
+            />
           </Box>
         )}
       </Button>

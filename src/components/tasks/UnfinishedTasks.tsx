@@ -16,7 +16,7 @@ function UnfinishedTasks({ taskStatus }: Props) {
   );
   return (
     <Box
-      marginTop={"%"}
+      marginTop={"1%"}
       overflowY={"auto"}
       marginLeft={"1%"}
       marginRight={"1%"}

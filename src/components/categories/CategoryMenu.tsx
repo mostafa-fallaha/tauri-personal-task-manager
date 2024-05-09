@@ -9,10 +9,11 @@ import { AppDispatch } from "../../state/store";
 import { getTasks } from "../../state/task/taskSlice";
 
 interface Props {
+  editingCat: (v: boolean) => void;
   id: number;
 }
 
-function CategoryMenu({ id }: Props) {
+function CategoryMenu({ id, editingCat }: Props) {
   const dispatch = useDispatch<AppDispatch>();
   return (
     <Menu>
@@ -29,7 +30,7 @@ function CategoryMenu({ id }: Props) {
         >
           delete
         </MenuItem>
-        <MenuItem>Edit</MenuItem>
+        <MenuItem onClick={() => editingCat(true)}>Edit</MenuItem>
       </MenuList>
     </Menu>
   );

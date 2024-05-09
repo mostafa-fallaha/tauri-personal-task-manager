@@ -26,7 +26,7 @@ function NavBar({ changeTaskStat }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box marginLeft={"1%"} marginRight={"1%"}>
-      <Box width={"100%"} display={"flex"} gap={2}>
+      <Box width={"100%"} display={"flex"} gap={2} height={"20svh"}>
         {/* =============== Running Task =========================================== */}
 
         <Box width={"50%"} backgroundColor={"#b3b3b3"} borderRadius={"2px"}>

@@ -7,6 +7,7 @@ import {
   HStack,
   Text,
   Tooltip,
+  VStack,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -110,12 +111,14 @@ function TaskBox({ task }: Props) {
     <Box display={"flex"} justifyContent={"space-evenly"} alignItems={"center"}>
       <Box width={"50%"}>
         <HStack>
-          <Text>{task.title}</Text>
-          <Text>
-            {"["}
-            {curRunCat.title}
-            {"]"}
-          </Text>
+          <VStack display={"flex"} alignItems={"flex-start"}>
+            <Text>{task.title}</Text>
+            <Text>
+              {"["}
+              {curRunCat.title}
+              {"]"}
+            </Text>
+          </VStack>
         </HStack>
       </Box>
       <Box>
@@ -149,7 +152,7 @@ function TaskBox({ task }: Props) {
           </Button>
         </Tooltip>
 
-        <CircularProgress value={sizePer} size={"75px"}>
+        <CircularProgress value={sizePer} size={"100px"}>
           <CircularProgressLabel>
             <Text fontSize={"0.8rem"}>{first ? task.duration : timeLeft}</Text>
           </CircularProgressLabel>
