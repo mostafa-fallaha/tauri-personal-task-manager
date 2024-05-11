@@ -109,11 +109,29 @@ function TaskBox({ task }: Props) {
 
   return (
     <Box display={"flex"} justifyContent={"space-evenly"} alignItems={"center"}>
-      <Box width={"50%"}>
+      <Box width={"40%"}>
         <HStack marginLeft={"5%"}>
           <VStack display={"flex"} alignItems={"flex-start"}>
-            <Text>{task.title}</Text>
-            <Text>
+            <Text
+              fontSize={{
+                base: "0.8rem",
+                md: "0.8rem",
+                md2: "0.9rem",
+                lg: "1.1rem",
+              }}
+              fontWeight={500}
+            >
+              {task.title}
+            </Text>
+            <Text
+              fontSize={{
+                base: "0.8rem",
+                md: "0.8rem",
+                md2: "0.9rem",
+                lg: "1.1rem",
+              }}
+              fontWeight={500}
+            >
               {"["}
               {curRunCat.title}
               {"]"}
@@ -121,10 +139,11 @@ function TaskBox({ task }: Props) {
           </VStack>
         </HStack>
       </Box>
-      <Box>
+      <HStack width={"50%"}>
         <Tooltip label="start">
           <Button
             isDisabled={!first || curRunTaskId !== task.id}
+            width={"20%"}
             background={"none"}
             _hover={{ background: "none" }}
             onClick={() => {
@@ -139,6 +158,7 @@ function TaskBox({ task }: Props) {
           <Button
             isDisabled={first}
             background={"none"}
+            width={"20%"}
             _hover={{ background: "none" }}
             onClick={pauseCountdown}
           >
@@ -152,16 +172,33 @@ function TaskBox({ task }: Props) {
           </Button>
         </Tooltip>
 
-        <CircularProgress value={sizePer} size={"100px"} color="lightgreen">
-          <CircularProgressLabel>
-            <Text fontSize={"0.8rem"}>{first ? task.duration : timeLeft}</Text>
-          </CircularProgressLabel>
-        </CircularProgress>
+        <Box width={"30%"}>
+          <CircularProgress
+            value={sizePer}
+            size={"100%"}
+            color="#06d6a0"
+            thickness={"8%"}
+          >
+            <CircularProgressLabel>
+              <Text
+                fontSize={{
+                  base: "0.5rem",
+                  md: "0.5rem",
+                  md2: "0.7rem",
+                  lg: "0.9rem",
+                }}
+              >
+                {first ? task.duration : timeLeft}
+              </Text>
+            </CircularProgressLabel>
+          </CircularProgress>
+        </Box>
 
         <Tooltip label="restart">
           <Button
             isDisabled={first}
             background={"none"}
+            width={"20%"}
             _hover={{ background: "none" }}
             onClick={() => {
               setIsRunning(false);
@@ -179,10 +216,11 @@ function TaskBox({ task }: Props) {
             stopAlarm();
           }}
         />
-      </Box>
+      </HStack>
       <Tooltip label="Remove from running task">
         <Button
           background={"none"}
+          width={"10%"}
           _hover={{ background: "none" }}
           onClick={() => dispatch(setCurrTaskRunnig(0))}
         >

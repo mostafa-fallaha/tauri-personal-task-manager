@@ -20,9 +20,10 @@ function UnfinishedTasks({ taskStatus }: Props) {
       overflowY={"auto"}
       marginLeft={"1%"}
       marginRight={"1%"}
-      borderTop={"1px solid #e0f4ff"}
-      backgroundColor={"#83c1fc"}
+      border={"3px solid #00274d"}
+      backgroundColor={"#00274d"}
       borderRadius={"2px"}
+      maxHeight={"65svh"}
     >
       {tasks.map((task) => (
         <TaskBox task={task} key={task.id} />

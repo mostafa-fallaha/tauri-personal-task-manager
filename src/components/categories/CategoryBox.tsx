@@ -31,10 +31,11 @@ function CategoryBox({ category }: Props) {
         background={
           c === category.id
             ? colorMode === "dark"
-              ? "#145caf"
-              : "#83c1fc"
+              ? "#b3daff"
+              : "#b3daff"
             : "none"
         }
+        _hover={{ background: "#b3daff" }}
         borderRadius={0}
         // borderLeft={"5px solid green"}
         width={"100%"}

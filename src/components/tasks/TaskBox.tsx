@@ -21,11 +21,11 @@ function TaskBox({ task }: Props) {
       justifyContent={"space-around"}
       alignItems={"center"}
       height={"7svh"}
-      // backgroundColor={index % 2 === 0 ? "#ededed" : "#ffffff"}
-      // marginTop={"1%"}
       gap={1}
-      borderBottom={"1px solid #e0f4ff"}
-      // borderRadius={"10px"}
+      textColor={"white"}
+      backgroundColor={"#00274d"}
+      borderBottom={"1px solid #0a427e"}
+      borderTop={"1px solid #0a427e"}
     >
       <Text width={"40%"}>{task.title}</Text>
 
