@@ -7,10 +7,10 @@ import {
   HStack,
   Text,
   Tooltip,
-  VStack,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { FaLevelDownAlt } from "react-icons/fa";
 import {
   VscDebugContinue,
   VscDebugPause,
@@ -20,12 +20,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Task from "../../interfaces/Task";
 import { AppDispatch, RootState } from "../../state/store";
-import AlarmModal from "./AlarmModal";
-import { FaLevelDownAlt } from "react-icons/fa";
 import {
   setCurrRunningCategory,
   setCurrRunningTask,
 } from "../../state/task/taskSlice";
+import AlarmModal from "./AlarmModal";
 
 interface Props {
   task: Task;
@@ -36,10 +35,6 @@ interface Props {
 function TaskBox({ task }: Props) {
   const curRunTaskId = useSelector(
     (state: RootState) => state.task.curRunTaskId
-  );
-  const curRunCat = useSelector(
-    (state: RootState) =>
-      state.category.categories.filter((c) => c.id === task.category_id)[0]
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -117,37 +112,6 @@ function TaskBox({ task }: Props) {
       alignItems={"center"}
       marginTop={"2%"}
     >
-      {/*<Box>
-         <HStack marginLeft={"5%"}>
-          <VStack display={"flex"} alignItems={"flex-start"}>
-            <Text
-              fontSize={{
-                base: "0.8rem",
-                md: "0.8rem",
-                md2: "0.9rem",
-                lg: "1.1rem",
-              }}
-              fontWeight={500}
-            >
-              {task.title}
-            </Text>
-            <Text
-              fontSize={{
-                base: "0.8rem",
-                md: "0.8rem",
-                md2: "0.9rem",
-                lg: "1.1rem",
-              }}
-              fontWeight={500}
-            >
-              {"["}
-              {curRunCat.title}
-              {"]"}
-            </Text>
-          </VStack>
-        </HStack> 
-      </Box>*/}
-
       <HStack>
         <Tooltip label="start">
           <Button

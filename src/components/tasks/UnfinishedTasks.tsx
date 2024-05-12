@@ -1,7 +1,8 @@
-import { Box } from "@chakra-ui/react";
+import { Box, HStack, Text } from "@chakra-ui/react";
 import TaskBox from "./TaskBox";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
+import { GoBlocked } from "react-icons/go";
 
 interface Props {
   taskStatus: boolean;
@@ -14,6 +15,15 @@ function UnfinishedTasks({ taskStatus }: Props) {
       (t) => t.task_done === taskStatus && t.category_id === c
     )
   );
+  if (tasks.length === 0)
+    return (
+      <HStack display={"flex"} justifyContent={"center"}>
+        <GoBlocked color="#00274d" />
+        <Text textAlign={"center"} textColor={"#00274d"}>
+          No Tasks
+        </Text>
+      </HStack>
+    );
   return (
     <Box
       marginTop={"1%"}

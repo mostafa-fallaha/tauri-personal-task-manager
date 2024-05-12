@@ -46,7 +46,7 @@ function NavBar({ changeTaskStat }: Props) {
 
         <Box
           width={"50%"}
-          backgroundColor={"#0a427e"}
+          backgroundColor={"#145caf"}
           borderRadius={0}
           textColor={"white"}
         >
@@ -55,7 +55,7 @@ function NavBar({ changeTaskStat }: Props) {
             fontWeight={800}
             alignSelf={"center"}
             textAlign={"center"}
-            textColor={"#06d6a0"}
+            textColor={"#ffffff"}
           >
             {curRunTask === undefined
               ? "no running Task"
@@ -74,7 +74,7 @@ function NavBar({ changeTaskStat }: Props) {
 
         <Box
           width={"50%"}
-          backgroundColor={"#0a427e"}
+          backgroundColor={"#145caf"}
           borderRadius={0}
           textColor={"white"}
         >
@@ -93,7 +93,7 @@ function NavBar({ changeTaskStat }: Props) {
           display={"flex"}
           justifyContent={"space-between"}
           alignItems={"center"}
-          width={"20%"}
+          width={{ base: "40%", md: "33%", md2: "28%", lg: "20%" }}
         >
           <HStack>
             {finishedTasks ? (
@@ -104,7 +104,7 @@ function NavBar({ changeTaskStat }: Props) {
 
             <Text
               textColor={finishedTasks ? "#35a067" : "#c9184a"}
-              fontSize={"1.3rem"}
+              fontSize={{ base: "1rem", md: "1.1rem", md2: "1.3rem" }}
               fontWeight={700}
             >
               {finishedTasks ? "Finished Tasks" : "Unfinished Tasks"}

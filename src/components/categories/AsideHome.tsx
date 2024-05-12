@@ -60,7 +60,7 @@ function AsideHome({ setNewSize }: Props) {
               }
             }}
           >
-            <FaPlus />
+            <FaPlus color="#145caf" />
           </Button>
         </Tooltip>
 

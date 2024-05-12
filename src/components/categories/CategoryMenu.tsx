@@ -18,7 +18,7 @@ function CategoryMenu({ id, editingCat }: Props) {
   return (
     <Menu>
       <MenuButton background={"none"} _hover={{ background: "none" }}>
-        <SlOptionsVertical />
+        <SlOptionsVertical color="#00274d" />
       </MenuButton>
       <MenuList>
         <MenuItem

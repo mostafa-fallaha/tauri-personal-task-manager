@@ -24,9 +24,9 @@ const theme = extendTheme({
     base: "0px",
     sm: "330px",
     sm2: "400px",
-    md: "1000px",
-    md2: "1100px",
-    lg: "1400px",
+    md: "1050px",
+    md2: "1200px",
+    lg: "1500px",
     xl: "1800px",
   },
 });

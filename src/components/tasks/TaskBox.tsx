@@ -5,6 +5,8 @@ import Task from "../../interfaces/Task";
 import { AppDispatch } from "../../state/store";
 import { deleteTask } from "../../state/task/taskSlice";
 import MenuComponent from "./MenuComponent";
+import { FaTasks } from "react-icons/fa";
+import { LuTimer } from "react-icons/lu";
 
 interface Props {
   task: Task;
@@ -23,13 +25,19 @@ function TaskBox({ task }: Props) {
       height={"7svh"}
       gap={1}
       textColor={"white"}
-      backgroundColor={"#0a427e"}
+      backgroundColor={"#145caf"}
       borderBottom={"1px solid #145caf"}
       borderTop={"1px solid #0a427e"}
     >
-      <Text width={"40%"}>{task.title}</Text>
+      <HStack width={"60%"}>
+        <FaTasks color="#ffffff" />
+        <Text marginLeft={"1%"}>{task.title}</Text>
+      </HStack>
 
-      <Text>{task.duration}</Text>
+      <HStack width={"20%"}>
+        <LuTimer />
+        <Text>{task.duration}</Text>
+      </HStack>
 
       <HStack>
         <Button
@@ -37,7 +45,7 @@ function TaskBox({ task }: Props) {
           _hover={{ background: "none", color: "red" }}
           onClick={() => dispatch(deleteTask(task.id))}
         >
-          <MdDelete size={"75%"} />
+          <MdDelete />
         </Button>
 
         <MenuComponent task={task} />
