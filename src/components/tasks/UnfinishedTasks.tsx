@@ -18,10 +18,8 @@ function UnfinishedTasks({ taskStatus }: Props) {
   if (tasks.length === 0)
     return (
       <HStack display={"flex"} justifyContent={"center"}>
-        <GoBlocked color="#00274d" />
-        <Text textAlign={"center"} textColor={"#00274d"}>
-          No Tasks
-        </Text>
+        <GoBlocked />
+        <Text textAlign={"center"}>No Tasks</Text>
       </HStack>
     );
   return (
@@ -30,8 +28,8 @@ function UnfinishedTasks({ taskStatus }: Props) {
       overflowY={"auto"}
       marginLeft={"1%"}
       marginRight={"1%"}
-      border={"1px solid #00274d"}
-      backgroundColor={"#00274d"}
+      // border={"1px"}
+      // backgroundColor={"#52b69a"}
       borderRadius={"3px"}
       maxHeight={"65svh"}
     >

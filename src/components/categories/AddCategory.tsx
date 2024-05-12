@@ -14,13 +14,13 @@ function AddCategory({ categoryAdded }: Props) {
   const [catTitle, setCatTitle] = useState("");
   const dispatch = useDispatch<AppDispatch>();
   return (
-    <HStack marginTop={"1%"} textColor={"#00274d"}>
+    <HStack marginTop={"1%"}>
       <Input
         type="text"
         value={catTitle}
         borderRadius={0}
-        border={"1px solid #145caf"}
-        _hover={{ border: "1px solid #145caf" }}
+        // border={"1px solid #145caf"}
+        // _hover={{ border: "1px solid #145caf" }}
         onChange={(e) => setCatTitle(e.target.value)}
       ></Input>
       <Button
@@ -30,10 +30,10 @@ function AddCategory({ categoryAdded }: Props) {
           categoryAdded(false);
         }}
       >
-        <FaCheck size={"100%"} color="#145caf" />
+        <FaCheck size={"100%"} />
       </Button>
       <Button borderRadius={0} onClick={() => categoryAdded(false)}>
-        <FaTimes size={"100%"} color="#145caf" />
+        <FaTimes size={"100%"} />
       </Button>
     </HStack>
   );

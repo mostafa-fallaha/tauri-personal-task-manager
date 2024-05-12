@@ -18,7 +18,7 @@ function TasksDashboard() {
     { name: "Uninished Tasks", value: unfinshedTasksLength },
   ];
 
-  const COLORS = ["#00C49F", "#ffd166"];
+  const COLORS = ["#0088FE", "#00805e"];
 
   return (
     <Box
@@ -55,11 +55,11 @@ function TasksDashboard() {
 
       <VStack alignItems={"flex-start"}>
         <HStack>
-          <MdRectangle size={30} color="#00C49F" />
+          <MdRectangle size={30} color="#0088FE" />
           <Text>Finished Tasks</Text>
         </HStack>
         <HStack>
-          <MdRectangle size={30} color="#ffd166" />
+          <MdRectangle size={30} color="#00805e" />
           <Text>Unfinished Tasks</Text>
         </HStack>
       </VStack>

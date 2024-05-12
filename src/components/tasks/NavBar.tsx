@@ -3,7 +3,7 @@ import {
   Button,
   HStack,
   Text,
-  // useColorMode,
+  useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -22,6 +22,7 @@ interface Props {
 }
 
 function NavBar({ changeTaskStat }: Props) {
+  const { colorMode } = useColorMode();
   const curRunTask = useSelector(
     (state: RootState) =>
       state.task.tasks.filter((t) => t.id === state.task.curRunTaskId)[0]
@@ -36,8 +37,6 @@ function NavBar({ changeTaskStat }: Props) {
 
   const [finishedTasks, setFinishedTasks] = useState(false);
 
-  // const { toggleColorMode } = useColorMode();
-
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box marginLeft={"1%"} marginRight={"1%"} marginTop={"0%"}>
@@ -46,16 +45,21 @@ function NavBar({ changeTaskStat }: Props) {
 
         <Box
           width={"50%"}
-          backgroundColor={"#145caf"}
-          borderRadius={0}
-          textColor={"white"}
+          background={colorMode === "dark" ? "#282828" : "#bfbfbf"}
+          boxShadow={
+            colorMode === "light"
+              ? "inset 20px 20px 60px #d6d6d6, inset -20px -20px 60px #787878"
+              : "inset 20px 20px 60px #4b4b4b, inset -20px -20px 60px #050505"
+          }
+          borderRadius={"4px"}
+          // textColor={"white"}
         >
           <Text
             fontSize={"1.2rem"}
             fontWeight={800}
             alignSelf={"center"}
             textAlign={"center"}
-            textColor={"#ffffff"}
+            // textColor={"#ffffff"}
           >
             {curRunTask === undefined
               ? "no running Task"
@@ -74,9 +78,13 @@ function NavBar({ changeTaskStat }: Props) {
 
         <Box
           width={"50%"}
-          backgroundColor={"#145caf"}
-          borderRadius={0}
-          textColor={"white"}
+          background={colorMode === "dark" ? "#282828" : "#bfbfbf"}
+          boxShadow={
+            colorMode === "light"
+              ? "inset 20px 20px 60px #d6d6d6, inset -20px -20px 60px #787878"
+              : "inset 20px 20px 60px #4b4b4b, inset -20px -20px 60px #050505"
+          }
+          borderRadius={"4px"}
         >
           <TasksDashboard />
         </Box>
@@ -99,11 +107,11 @@ function NavBar({ changeTaskStat }: Props) {
             {finishedTasks ? (
               <IoCheckmarkDoneSharp color="#35a067" size={"10%"} />
             ) : (
-              <BsHourglassSplit color="#c9184a" size={"10%"} />
+              <BsHourglassSplit color="#0088FE" size={"10%"} />
             )}
 
             <Text
-              textColor={finishedTasks ? "#35a067" : "#c9184a"}
+              textColor={finishedTasks ? "#35a067" : "#0088FE"}
               fontSize={{ base: "1rem", md: "1.1rem", md2: "1.3rem" }}
               fontWeight={700}
             >
@@ -117,9 +125,20 @@ function NavBar({ changeTaskStat }: Props) {
               else changeTaskStat(true);
               setFinishedTasks(!finishedTasks);
             }}
-            backgroundColor={"#e26d5c"}
+            background={colorMode === "dark" ? "#bfbfbf" : "#bfbfbf"}
+            boxShadow={
+              colorMode === "light"
+                ? "inset 20px 20px 60px #d6d6d6, inset -20px -20px 60px #000000"
+                : "inset 20px 20px 40px #4b4b4b, inset -20px -20px 40px #000000"
+            }
+            _hover={{
+              background: "#bfbfbf",
+              boxShadow:
+                colorMode === "light"
+                  ? "inset 20px 20px 60px #4b4b4b, inset -20px -20px 60px #d6d6d6"
+                  : "inset 20px 20px 40px #6b6b6b, inset -20px -20px 40px #000000",
+            }}
             borderRadius={"50%"}
-            _hover={{ backgroundColor: "#723d46" }}
           >
             <HiSwitchHorizontal size={"100%"} />
           </Button>
@@ -127,17 +146,27 @@ function NavBar({ changeTaskStat }: Props) {
 
         <Button
           onClick={() => onOpen()}
-          borderRadius={0}
-          backgroundColor={"#06d6a0"}
-          _hover={{ backgroundColor: "#35a067" }}
+          borderRadius={"3px"}
+          background={colorMode === "dark" ? "#bfbfbf" : "#bfbfbf"}
+          boxShadow={
+            colorMode === "light"
+              ? "inset 20px 20px 60px #ff4d6d, inset -20px -20px 60px #d6d6d6"
+              : "inset 20px 20px 40px #ff4d6d, inset -20px -20px 40px #000000"
+          }
+          _hover={{
+            background: "#bfbfbf",
+            boxShadow:
+              colorMode === "light"
+                ? "inset 20px 20px 60px #c9184a, inset -20px -20px 60px #d6d6d6"
+                : "inset 20px 20px 40px #a4133c, inset -20px -20px 40px #000000",
+          }}
         >
           <HStack display={"flex"} justifyContent={"center"}>
             <GoPlus />
-            <Text>Add a new Task</Text>
+            <Text>Add Task</Text>
           </HStack>
         </Button>
       </HStack>
-      {/* <Button onClick={toggleColorMode}>ss</Button> */}
     </Box>
   );
 }

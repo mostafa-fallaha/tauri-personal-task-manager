@@ -1,5 +1,4 @@
 import { Box, Button, HStack, Text, useColorMode } from "@chakra-ui/react";
-// import { FaCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Category from "../../interfaces/category";
 import { setCurrCatId } from "../../state/category/categorySlice";
@@ -31,22 +30,33 @@ function CategoryBox({ category }: Props) {
         background={
           c === category.id
             ? colorMode === "dark"
-              ? "#b3daff"
-              : "#b3daff"
+              ? "#bfbfbf"
+              : "#bfbfbf"
             : "none"
         }
-        _hover={{ background: "#b3daff" }}
+        boxShadow={
+          c === category.id
+            ? colorMode === "light"
+              ? "inset 20px 20px 40px #d6d6d6, inset -20px -20px 40px #000000"
+              : "inset 20px 20px 40px #4b4b4b, inset -20px -20px 40px #000000"
+            : "none"
+        }
+        _hover={{
+          background: "#bfbfbf",
+          boxShadow:
+            colorMode === "light"
+              ? "inset 20px 20px 40px #d6d6d6, inset -20px -20px 40px #000000"
+              : "inset 20px 20px 40px #4b4b4b, inset -20px -20px 40px #000000",
+        }}
         borderRadius={0}
-        // borderLeft={"5px solid green"}
         width={"100%"}
         display={"flex"}
         justifyContent={"space-between"}
         onClick={() => dispatch(setCurrCatId(category.id))}
       >
         <HStack display={"flex"} justifyContent={"center"}>
-          {/* <FaCircle color="green" /> */}
           <MdOutlinePanoramaVerticalSelect color={"#0077b6"} />
-          <Text textColor={"#00274d"}>{category.title}</Text>
+          <Text>{category.title}</Text>
         </HStack>
         {category.id !== 1 && (
           <Box alignSelf={"center"}>

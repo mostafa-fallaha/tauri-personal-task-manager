@@ -1,23 +1,24 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
+import "@fontsource/ubuntu";
 
 const config: ThemeConfig = {
-  initialColorMode: "light",
+  initialColorMode: "dark",
 };
 
 const theme = extendTheme({
   config,
   colors: {
     gray: {
-      50: "#e0f4ff",
-      100: "#b3daff",
-      200: "#83c1fc",
-      300: "#55a9fb",
-      400: "#2f90fa",
-      500: "#1f76e1",
-      600: "#145caf",
-      700: "#0a427e",
-      800: "#00274d",
-      900: "#000d1e",
+      50: "#f2f2f2",
+      100: "#d9d9d9",
+      200: "#bfbfbf",
+      300: "#a6a6a6",
+      400: "#8c8c8c",
+      500: "#737373",
+      600: "#595959",
+      700: "#404040",
+      800: "#262626",
+      900: "#0d0d0d",
     },
   },
   breakpoints: {
@@ -28,6 +29,10 @@ const theme = extendTheme({
     md2: "1200px",
     lg: "1500px",
     xl: "1800px",
+  },
+  fonts: {
+    heading: `'Ubuntu', sans-serif`,
+    body: `'Ubuntu', sans-serif`,
   },
 });
 

@@ -1,8 +1,8 @@
-import { Box, Button, HStack, Text } from "@chakra-ui/react";
+import { Box, Button, HStack, Text, useColorMode } from "@chakra-ui/react";
 import { MdDelete } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Task from "../../interfaces/Task";
-import { AppDispatch } from "../../state/store";
+import { AppDispatch, RootState } from "../../state/store";
 import { deleteTask } from "../../state/task/taskSlice";
 import MenuComponent from "./MenuComponent";
 import { FaTasks } from "react-icons/fa";
@@ -15,7 +15,9 @@ interface Props {
 // check point 3
 
 function TaskBox({ task }: Props) {
+  const curTaskRun = useSelector((state: RootState) => state.task.curRunTaskId);
   const dispatch = useDispatch<AppDispatch>();
+  const { colorMode } = useColorMode();
 
   return (
     <Box
@@ -24,13 +26,21 @@ function TaskBox({ task }: Props) {
       alignItems={"center"}
       height={"7svh"}
       gap={1}
-      textColor={"white"}
-      backgroundColor={"#145caf"}
-      borderBottom={"1px solid #145caf"}
-      borderTop={"1px solid #0a427e"}
+      // backgroundColor={"#43aa8b"}
+      borderRadius={"4px"}
+      marginBottom={"1%"}
+      boxShadow={
+        curTaskRun !== task.id
+          ? colorMode === "light"
+            ? "inset 20px 20px 60px #d6d6d6, inset -20px -20px 60px #000000"
+            : "inset 20px 20px 60px #4b4b4b, inset -20px -20px 60px #000000"
+          : colorMode === "light"
+          ? "inset 20px 20px 60px #00805e, inset -20px -20px 60px #000000"
+          : "inset 20px 20px 60px #00805e, inset -20px -20px 60px #000000"
+      }
     >
       <HStack width={"60%"}>
-        <FaTasks color="#ffffff" />
+        <FaTasks />
         <Text marginLeft={"1%"}>{task.title}</Text>
       </HStack>
 
@@ -42,10 +52,10 @@ function TaskBox({ task }: Props) {
       <HStack>
         <Button
           background={"none"}
-          _hover={{ background: "none", color: "red" }}
+          _hover={{ background: "none", color: "#d62828" }}
           onClick={() => dispatch(deleteTask(task.id))}
         >
-          <MdDelete />
+          <MdDelete size={"25px"} />
         </Button>
 
         <MenuComponent task={task} />

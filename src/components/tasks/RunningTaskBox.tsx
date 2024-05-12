@@ -122,7 +122,7 @@ function TaskBox({ task }: Props) {
               startCountdown();
             }}
           >
-            <VscDebugStart />
+            <VscDebugStart size={"25px"} />
           </Button>
         </Tooltip>
 
@@ -134,22 +134,17 @@ function TaskBox({ task }: Props) {
             onClick={pauseCountdown}
           >
             {first ? (
-              <VscDebugPause />
+              <VscDebugPause size={"25px"} />
             ) : isRunning ? (
-              <VscDebugPause />
+              <VscDebugPause size={"25px"} />
             ) : (
-              <VscDebugContinue />
+              <VscDebugContinue size={"25px"} />
             )}
           </Button>
         </Tooltip>
 
         <Box>
-          <CircularProgress
-            value={sizePer}
-            size={"80px"}
-            color="#06d6a0"
-            thickness={"8%"}
-          >
+          <CircularProgress value={sizePer} size={"90px"} thickness={"8%"}>
             <CircularProgressLabel>
               <Text
                 fontSize={{
@@ -176,7 +171,7 @@ function TaskBox({ task }: Props) {
               setSizePer(0);
             }}
           >
-            <VscDebugRestart />
+            <VscDebugRestart size={"25px"} />
           </Button>
         </Tooltip>
         <AlarmModal
@@ -198,7 +193,7 @@ function TaskBox({ task }: Props) {
               dispatch(setCurrRunningCategory(0));
             }}
           >
-            <FaLevelDownAlt />
+            <FaLevelDownAlt size={"25px"} />
           </Button>
         </Tooltip>
       </Box>
