@@ -22,7 +22,10 @@ import Task from "../../interfaces/Task";
 import { AppDispatch, RootState } from "../../state/store";
 import AlarmModal from "./AlarmModal";
 import { FaLevelDownAlt } from "react-icons/fa";
-import { setCurrTaskRunnig } from "../../state/task/taskSlice";
+import {
+  setCurrRunningCategory,
+  setCurrRunningTask,
+} from "../../state/task/taskSlice";
 
 interface Props {
   task: Task;
@@ -108,9 +111,14 @@ function TaskBox({ task }: Props) {
   };
 
   return (
-    <Box display={"flex"} justifyContent={"space-evenly"} alignItems={"center"}>
-      <Box width={"40%"}>
-        <HStack marginLeft={"5%"}>
+    <Box
+      display={"flex"}
+      justifyContent={"space-evenly"}
+      alignItems={"center"}
+      marginTop={"2%"}
+    >
+      {/*<Box>
+         <HStack marginLeft={"5%"}>
           <VStack display={"flex"} alignItems={"flex-start"}>
             <Text
               fontSize={{
@@ -137,13 +145,13 @@ function TaskBox({ task }: Props) {
               {"]"}
             </Text>
           </VStack>
-        </HStack>
-      </Box>
-      <HStack width={"50%"}>
+        </HStack> 
+      </Box>*/}
+
+      <HStack>
         <Tooltip label="start">
           <Button
             isDisabled={!first || curRunTaskId !== task.id}
-            width={"20%"}
             background={"none"}
             _hover={{ background: "none" }}
             onClick={() => {
@@ -158,7 +166,6 @@ function TaskBox({ task }: Props) {
           <Button
             isDisabled={first}
             background={"none"}
-            width={"20%"}
             _hover={{ background: "none" }}
             onClick={pauseCountdown}
           >
@@ -172,19 +179,18 @@ function TaskBox({ task }: Props) {
           </Button>
         </Tooltip>
 
-        <Box width={"30%"}>
+        <Box>
           <CircularProgress
             value={sizePer}
-            size={"100%"}
+            size={"80px"}
             color="#06d6a0"
             thickness={"8%"}
           >
             <CircularProgressLabel>
               <Text
                 fontSize={{
-                  base: "0.5rem",
-                  md: "0.5rem",
-                  md2: "0.7rem",
+                  base: "0.7rem",
+                  md: "0.7rem",
                   lg: "0.9rem",
                 }}
               >
@@ -217,16 +223,21 @@ function TaskBox({ task }: Props) {
           }}
         />
       </HStack>
-      <Tooltip label="Remove from running task">
-        <Button
-          background={"none"}
-          width={"10%"}
-          _hover={{ background: "none" }}
-          onClick={() => dispatch(setCurrTaskRunnig(0))}
-        >
-          <FaLevelDownAlt />
-        </Button>
-      </Tooltip>
+      <Box>
+        <Tooltip label="Remove from running task">
+          <Button
+            background={"none"}
+            width={"10%"}
+            _hover={{ background: "none" }}
+            onClick={() => {
+              dispatch(setCurrRunningTask(0));
+              dispatch(setCurrRunningCategory(0));
+            }}
+          >
+            <FaLevelDownAlt />
+          </Button>
+        </Tooltip>
+      </Box>
     </Box>
   );
 }

@@ -23,8 +23,8 @@ function TaskBox({ task }: Props) {
       height={"7svh"}
       gap={1}
       textColor={"white"}
-      backgroundColor={"#00274d"}
-      borderBottom={"1px solid #0a427e"}
+      backgroundColor={"#0a427e"}
+      borderBottom={"1px solid #145caf"}
       borderTop={"1px solid #0a427e"}
     >
       <Text width={"40%"}>{task.title}</Text>

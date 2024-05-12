@@ -2,36 +2,41 @@ import {
   Box,
   Button,
   HStack,
-  Select,
   Text,
-  useColorMode,
+  // useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
-import Task from "../../interfaces/Task";
-import { RootState } from "../../state/store";
-import { useSelector } from "react-redux";
-import RunningTaskBox from "./RunningTaskBox";
-import { GoPlus } from "react-icons/go";
-import InputTaskModal from "./InputTaskModal";
-import TasksDashboard from "./TasksDashboard";
 import { useState } from "react";
+import { BsHourglassSplit } from "react-icons/bs";
+import { GoPlus } from "react-icons/go";
 import { HiSwitchHorizontal } from "react-icons/hi";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
-import { BsHourglassSplit } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { RootState } from "../../state/store";
+import InputTaskModal from "./InputTaskModal";
+import RunningTaskBox from "./RunningTaskBox";
+import TasksDashboard from "./TasksDashboard";
 
 interface Props {
   changeTaskStat: (stat: boolean) => void;
 }
 
 function NavBar({ changeTaskStat }: Props) {
-  const curRunTask: Task | undefined = useSelector(
+  const curRunTask = useSelector(
     (state: RootState) =>
       state.task.tasks.filter((t) => t.id === state.task.curRunTaskId)[0]
   );
 
+  const curRunCat = useSelector(
+    (state: RootState) =>
+      state.category.categories.filter(
+        (c) => c.id === state.task.curRunCategoryId
+      )[0]
+  );
+
   const [finishedTasks, setFinishedTasks] = useState(false);
 
-  const { toggleColorMode } = useColorMode();
+  // const { toggleColorMode } = useColorMode();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -41,25 +46,24 @@ function NavBar({ changeTaskStat }: Props) {
 
         <Box
           width={"50%"}
-          backgroundColor={"#00274d"}
+          backgroundColor={"#0a427e"}
           borderRadius={0}
           textColor={"white"}
         >
           <Text
-            fontSize={"1.4rem"}
+            fontSize={"1.2rem"}
             fontWeight={800}
             alignSelf={"center"}
             textAlign={"center"}
             textColor={"#06d6a0"}
           >
-            Running Task
+            {curRunTask === undefined
+              ? "no running Task"
+              : "[" + curRunCat.title + "]" + " : " + curRunTask.title}
           </Text>
+
           <Box height={"10svh"}>
-            {curRunTask === undefined ? (
-              <Text textAlign={"center"} marginTop={"2%"}>
-                no running task
-              </Text>
-            ) : (
+            {curRunTask !== undefined && (
               <RunningTaskBox task={curRunTask} key={curRunTask.id} />
             )}
           </Box>
@@ -70,19 +74,10 @@ function NavBar({ changeTaskStat }: Props) {
 
         <Box
           width={"50%"}
-          backgroundColor={"#00274d"}
+          backgroundColor={"#0a427e"}
           borderRadius={0}
           textColor={"white"}
         >
-          {/* <Text
-            fontSize={"1.4rem"}
-            fontWeight={800}
-            alignSelf={"center"}
-            textAlign={"center"}
-            textColor={"#e0b1cb"}
-          >
-            Your Progress
-          </Text> */}
           <TasksDashboard />
         </Box>
       </Box>
@@ -94,36 +89,6 @@ function NavBar({ changeTaskStat }: Props) {
         marginTop={"3%"}
         justifyContent={"space-between"}
       >
-        {/* <Select
-          variant="filled"
-          bg={"#b3daff"}
-          borderRadius={0}
-          width={"30%"}
-          _hover={{ cursor: "pointer" }}
-          // color={"white"}
-          fontSize={"1rem"}
-          onChange={(e) => {
-            if (e.target.value === "Unfinished") {
-              changeTaskStat(false);
-            } else {
-              changeTaskStat(true);
-            }
-          }}
-        >
-          <option
-            value="Unfinished"
-            // style={{ fontSize: "1rem", backgroundColor: "#0a427e" }}
-          >
-            Unfinished tasks
-          </option>
-
-          <option
-            value="Finished"
-            // style={{ fontSize: "1rem", backgroundColor: "#0a427e" }}
-          >
-            Finished tasks
-          </option>
-        </Select> */}
         <Box
           display={"flex"}
           justifyContent={"space-between"}

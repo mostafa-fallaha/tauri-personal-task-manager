@@ -20,9 +20,9 @@ function UnfinishedTasks({ taskStatus }: Props) {
       overflowY={"auto"}
       marginLeft={"1%"}
       marginRight={"1%"}
-      border={"3px solid #00274d"}
+      border={"1px solid #00274d"}
       backgroundColor={"#00274d"}
-      borderRadius={"2px"}
+      borderRadius={"3px"}
       maxHeight={"65svh"}
     >
       {tasks.map((task) => (

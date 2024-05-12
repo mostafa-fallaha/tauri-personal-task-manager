@@ -46,7 +46,7 @@ function CategoryBox({ category }: Props) {
         <HStack display={"flex"} justifyContent={"center"}>
           {/* <FaCircle color="green" /> */}
           <MdOutlinePanoramaVerticalSelect color={"#0077b6"} />
-          <Text>{category.title}</Text>
+          <Text textColor={"#00274d"}>{category.title}</Text>
         </HStack>
         {category.id !== 1 && (
           <Box alignSelf={"center"}>

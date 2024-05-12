@@ -14,7 +14,11 @@ import { useState } from "react";
 import EditTaskModal from "./EditTaskModal";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../state/store";
-import { setCurrTaskRunnig, setTaskStatus } from "../../state/task/taskSlice";
+import {
+  setCurrRunningCategory,
+  setCurrRunningTask,
+  setTaskStatus,
+} from "../../state/task/taskSlice";
 
 interface Props {
   task: Task;
@@ -51,7 +55,8 @@ function MenuComponent({ task }: Props) {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            dispatch(setCurrTaskRunnig(task.id));
+            dispatch(setCurrRunningTask(task.id));
+            dispatch(setCurrRunningCategory(task.category_id));
             // if (curRunTaskId === 0)
             // else if (task.id === curRunTaskId) {
             //   dispatch(setCurrTaskRunnig(0));
@@ -73,7 +78,10 @@ function MenuComponent({ task }: Props) {
                 taskDone: !task.task_done,
               })
             );
-            if (task.id === curRunTaskId) dispatch(setCurrTaskRunnig(0));
+            if (task.id === curRunTaskId) {
+              dispatch(setCurrRunningTask(0));
+              dispatch(setCurrRunningCategory(0));
+            }
           }}
         >
           set Task as {task.task_done ? "unfinished" : "finished"}
