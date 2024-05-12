@@ -10,7 +10,6 @@ function App() {
       templateAreas={{ base: `"aside main"` }}
       templateColumns={asideSize + "px 1fr"}
       height={"100svh"}
-      // backgroundColor={colorMode === "dark" ? "#ffffff" : "#ffffff"}
     >
       <GridItem area={"aside"}>
         <AsideHome setNewSize={(size) => setAsideSize(size)} />
