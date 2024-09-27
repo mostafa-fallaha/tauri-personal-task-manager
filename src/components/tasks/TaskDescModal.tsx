@@ -28,7 +28,7 @@ function TaskDescModal({ isOpen, onClose, task }: Props) {
         <ModalHeader>
           <HStack display={"flex"} justifyContent={"space-between"}>
             <Text fontWeight={700}>{task.title}</Text>
-            <Text fontSize={"0.8rem"} marginRight={"10%"}>
+            <Text fontSize={"0.7rem"} marginRight={"10%"}>
               {convert_to_date(task.date_added)}
             </Text>
           </HStack>
