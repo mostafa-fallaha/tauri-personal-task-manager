@@ -2,6 +2,8 @@
 
 #### A desktop app designed to facilitate managing personal tasks.
 
+The app was built using the Tauri framework (Rust for the backend and React for the frontend).
+
 ## Main Features
 
 - Adding tasks based on categories
